@@ -12,7 +12,7 @@
     @for (var i = 0; i < cards.Count; i ++)
     {
         <li>
-            <a class="nav-link text-dark" asp-area="" asp-controller="CatalogCard" asp-action="Show">@cards[i].CatalogName</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="CatalogCard"  asp-action="ShowOneCard" asp-route-name="@cards[i].CatalogName">@cards[i].CatalogName</a>
         </li>
     }
 </ol>
