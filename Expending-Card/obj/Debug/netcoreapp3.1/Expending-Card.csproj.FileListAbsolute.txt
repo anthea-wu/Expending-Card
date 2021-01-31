@@ -38,3 +38,4 @@ C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcorea
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Expending-Card.csproj.CopyComplete
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\Show.cshtml.g.cs
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\ShowOneCard.cshtml.g.cs
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\DetailEdit\AllDeteails.cshtml.g.cs

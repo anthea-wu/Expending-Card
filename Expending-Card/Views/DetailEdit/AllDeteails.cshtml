@@ -1,0 +1,16 @@
+﻿@{
+    var details = ViewBag.list;
+}
+
+@{
+    ViewBag.Title = "記帳明細";
+    Layout = "_Layout";
+}
+
+<h2>記帳明細</h2>
+<ol class="mt-3">
+@foreach (var detail in @details)
+{
+    <li>@detail.ExpendingDate: @detail.ExpendingDetails - @detail.ExpendingPrice  (@detail.ExpendingCard.CatalogName)</li>
+}
+</ol>

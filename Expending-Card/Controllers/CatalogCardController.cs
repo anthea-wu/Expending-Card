@@ -5,8 +5,7 @@ using Expending_Card.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Expending_Card.Controllers
-{
-    public class CatalogCardController : Controller
+{ public class CatalogCardController : Controller
     {
         private readonly List<CatalogCards> _catalogCards = new List<CatalogCards>()
         {
