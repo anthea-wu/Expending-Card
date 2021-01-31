@@ -2,16 +2,17 @@
 @model object
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "卡片總覽";
     Layout = "_Layout";
+    var cards = ViewBag.list;
 }
 
-<h2>This Page is for Catalog Cards.</h2>
+<h2>Catalog Cards</h2>
 <ol>
-    @foreach (var item in ViewBag.list)
+    @for (var i = 0; i < cards.Count; i ++)
     {
         <li>
-            @item.CatalogName
+            <a class="nav-link text-dark" asp-area="" asp-controller="CatalogCard" asp-action="Show">@cards[i].CatalogName</a>
         </li>
     }
 </ol>

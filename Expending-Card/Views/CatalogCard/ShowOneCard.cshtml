@@ -1,0 +1,12 @@
+﻿@model object
+
+@{
+    var card = ViewBag.card;
+}
+
+@{
+    ViewBag.Title = card.CatalogName;
+    Layout = "_Layout";
+}
+
+<h2>@card.CatalogName</h2>
