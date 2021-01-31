@@ -8,10 +8,10 @@
 }
 
 <h2>Catalog Cards</h2>
-<ol>
+<ol class="mt-3">
     @for (var i = 0; i < cards.Count; i ++)
     {
-        <li>
+        <li class="mt-0">
             <a class="nav-link text-dark" asp-area="" asp-controller="CatalogCard"  asp-action="ShowOneCard" asp-route-name="@cards[i].CatalogName">@cards[i].CatalogName</a>
         </li>
     }
