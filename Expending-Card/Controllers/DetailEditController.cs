@@ -25,7 +25,7 @@ namespace Expending_Card.Controllers
         };
             
         // GET
-        public IActionResult AllDeteails()
+        public IActionResult AllDetails()
         {
             ViewBag.list = _expendingDetails;
             return View();

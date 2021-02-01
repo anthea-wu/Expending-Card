@@ -63,7 +63,6 @@ C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Expending-Card.RazorCoreGenerate.cache
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\Show.cshtml.g.cs
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\ShowOneCard.cshtml.g.cs
-C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\DetailEdit\AllDeteails.cshtml.g.cs
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
@@ -80,3 +79,4 @@ C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Expending-Card.pdb
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Expending-Card.genruntimeconfig.cache
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Expending-Card.csproj.CopyComplete
+C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\DetailEdit\AllDetails.cshtml.g.cs
