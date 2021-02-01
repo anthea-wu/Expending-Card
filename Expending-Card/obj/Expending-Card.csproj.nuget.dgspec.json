@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\d0509\\Documents\\GitHub\\Expending-Card\\Expending-Card\\Expending-Card.csproj": {}
+    "C:\\Users\\anthea.wu15\\Documents\\AspNetCore_learning\\Expending-Card\\Expending-Card\\Expending-Card.csproj": {}
   },
   "projects": {
-    "C:\\Users\\d0509\\Documents\\GitHub\\Expending-Card\\Expending-Card\\Expending-Card.csproj": {
+    "C:\\Users\\anthea.wu15\\Documents\\AspNetCore_learning\\Expending-Card\\Expending-Card\\Expending-Card.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\d0509\\Documents\\GitHub\\Expending-Card\\Expending-Card\\Expending-Card.csproj",
+        "projectUniqueName": "C:\\Users\\anthea.wu15\\Documents\\AspNetCore_learning\\Expending-Card\\Expending-Card\\Expending-Card.csproj",
         "projectName": "Expending-Card",
-        "projectPath": "C:\\Users\\d0509\\Documents\\GitHub\\Expending-Card\\Expending-Card\\Expending-Card.csproj",
-        "packagesPath": "C:\\Users\\d0509\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\d0509\\Documents\\GitHub\\Expending-Card\\Expending-Card\\obj\\",
+        "projectPath": "C:\\Users\\anthea.wu15\\Documents\\AspNetCore_learning\\Expending-Card\\Expending-Card\\Expending-Card.csproj",
+        "packagesPath": "C:\\Users\\anthea.wu15\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\anthea.wu15\\Documents\\AspNetCore_learning\\Expending-Card\\Expending-Card\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\d0509\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\anthea.wu15\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://nuget.coreop.net/nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
