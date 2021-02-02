@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Expending_Card.Models.CardsViewModel>
+
+@{
+    ViewData["Title"] = "卡片總覽";
+    Layout = "_Layout";
+}
+
+<h2>類別卡片</h2>
+<ol class="mt-3">
+    @foreach (var item in @Model)
+    {
+        <li class="mt-0">
+            <a class="nav-link text-dark" asp-area="" asp-controller="CatalogCard" asp-action="ShowOneCard" asp-route-name="@item.CatalogName">@item.CatalogName</a>
+        </li>
+    }
+</ol>
