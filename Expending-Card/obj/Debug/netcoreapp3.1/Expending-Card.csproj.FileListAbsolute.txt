@@ -81,3 +81,10 @@ C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\DetailEdit\AllDetails.cshtml.g.cs
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\DetailEdit\AddDetails.cshtml.g.cs
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\Index.cshtml.g.cs
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll

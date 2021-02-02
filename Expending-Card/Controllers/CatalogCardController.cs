@@ -3,18 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using Expending_Card.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Expending_Card.Controllers
 { public class CatalogCardController : Controller
     {
-        private List<CardsViewModel> _cards = new List<CardsViewModel>();
+        private readonly ILogger<CatalogCardController> _logger;
+        private readonly List<CardsViewModel> _cards = new List<CardsViewModel>();
+
+        public CatalogCardController (ILogger<CatalogCardController> logger) 
+        {
+            _logger = logger;
+        }
 
         // GET
         public IActionResult Index()
         {
             if (_cards.Count == 0)
             {
-                GenerateCards("未分類", 0);
+                GenerateCards("未分類", 1);
             }
             
             return View(_cards);
@@ -35,6 +42,8 @@ namespace Expending_Card.Controllers
 
         private void GenerateCards(string cardName, int cardOrder)
         {
+            _logger.LogInformation(cardName);   
+            _logger.LogInformation(cardOrder.ToString());
             _cards.Add(new CardsViewModel() {CatalogName = cardName, CatalogOrder = cardOrder});
         }
 
