@@ -36,7 +36,6 @@ C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcorea
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Expending-Card.pdb
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Expending-Card.genruntimeconfig.cache
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Expending-Card.csproj.CopyComplete
-C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\Show.cshtml.g.cs
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\ShowOneCard.cshtml.g.cs
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\appsettings.json
@@ -81,3 +80,12 @@ C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\DetailEdit\AllDetails.cshtml.g.cs
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\DetailEdit\AllDetails.cshtml.g.cs
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\DetailEdit\AddDetails.cshtml.g.cs
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\Index.cshtml.g.cs
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.dll
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\CardEditError.cshtml.g.cs

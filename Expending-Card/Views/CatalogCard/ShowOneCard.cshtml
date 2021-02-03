@@ -1,12 +1,9 @@
-﻿@model object
+﻿@model Expending_Card.Models.CardsViewModel
 
 @{
-    var card = ViewBag.card;
-}
-
-@{
-    ViewBag.Title = card.CatalogName;
+    ViewData["Title"] = @Model.CatalogName;
     Layout = "_Layout";
 }
 
-<h2>@card.CatalogName</h2>
+<h2>@Model.CatalogName</h2>
+<p>卡片序號: @Model.CatalogOrder</p>
