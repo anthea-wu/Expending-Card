@@ -32,8 +32,7 @@ namespace Expending_Card.Controllers
         {
             if (_cards.All(x => x.CatalogName != name))
             {
-                var cardOrder = _cards.Count + 1;
-                CreateCards(name, cardOrder);
+                CreateCards(name);
             }
 
             var showCard = _cards[GetCardOrder(name)];
@@ -45,8 +44,7 @@ namespace Expending_Card.Controllers
         {
             if (_cards.All(x => x.CatalogName != name))
             {
-                var cardOrder = _cards.Count + 1;
-                CreateCards(name, cardOrder);
+                CreateCards(name);
             }
             else
             {
@@ -63,10 +61,13 @@ namespace Expending_Card.Controllers
             return View();
         }
 
-        private void CreateCards(string cardName, int cardOrder)
+        private void CreateCards(string cardName, int cardOrder = -1)
         {
-            _logger.LogInformation(cardName);   
-            _logger.LogInformation(cardOrder.ToString());
+            cardOrder = cardOrder switch
+            {
+                -1 => _cards.Count + 1,
+                _ => cardOrder
+            };
             _cards.Add(new CardsViewModel() {CatalogName = cardName, CatalogOrder = cardOrder});
         }
 
