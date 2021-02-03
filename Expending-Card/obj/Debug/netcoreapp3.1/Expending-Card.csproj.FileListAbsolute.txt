@@ -88,3 +88,4 @@ C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcorea
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\CardEditError.cshtml.g.cs

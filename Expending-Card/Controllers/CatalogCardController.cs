@@ -21,7 +21,7 @@ namespace Expending_Card.Controllers
         {
             if (_cards.Count == 0)
             {
-                GenerateCards("未分類", 1);
+                CreateCards("未分類", 1);
             }
             
             return View(_cards);
@@ -33,14 +33,37 @@ namespace Expending_Card.Controllers
             if (_cards.All(x => x.CatalogName != name))
             {
                 var cardOrder = _cards.Count + 1;
-                GenerateCards(name, cardOrder);
+                CreateCards(name, cardOrder);
             }
 
             var showCard = _cards[GetCardOrder(name)];
             return View(showCard);
         }
 
-        private void GenerateCards(string cardName, int cardOrder)
+        [HttpPost]
+        public IActionResult AddCards(string name)
+        {
+            if (_cards.All(x => x.CatalogName != name))
+            {
+                var cardOrder = _cards.Count + 1;
+                CreateCards(name, cardOrder);
+            }
+            else
+            {
+                var details = "卡片已存在！";
+                return RedirectToAction("CardEditError", new {details=details});
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult CardEditError(string details)
+        {
+            ViewBag.error = details;
+            return View();
+        }
+
+        private void CreateCards(string cardName, int cardOrder)
         {
             _logger.LogInformation(cardName);   
             _logger.LogInformation(cardOrder.ToString());
