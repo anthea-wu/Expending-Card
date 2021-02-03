@@ -9,7 +9,7 @@ namespace Expending_Card.Controllers
 { public class CatalogCardController : Controller
     {
         private readonly ILogger<CatalogCardController> _logger;
-        private readonly List<CardsViewModel> _cards = new List<CardsViewModel>();
+        private static readonly List<CardsViewModel> _cards = new List<CardsViewModel>();
 
         public CatalogCardController (ILogger<CatalogCardController> logger) 
         {
