@@ -21,7 +21,7 @@ namespace Expending_Card.Controllers
         {
             if (_cards.Count == 0)
             {
-                CreateCards("未分類", 1);
+                CreateCards("未分類");
             }
             
             return View(_cards);
@@ -30,11 +30,10 @@ namespace Expending_Card.Controllers
         [Route("{Controller}/{name}")]
         public IActionResult ShowOneCard(string name)
         {
-            if (_cards.All(x => x.CatalogName != name))
+            if (!IsCardExist(name))
             {
                 CreateCards(name);
             }
-
             var showCard = _cards[GetCardOrder(name)];
             return View(showCard);
         }
@@ -42,17 +41,15 @@ namespace Expending_Card.Controllers
         [HttpPost]
         public IActionResult AddCards(string name)
         {
-            if (_cards.All(x => x.CatalogName != name))
+            switch (IsCardExist(name))
             {
-                CreateCards(name);
+                case false:
+                    CreateCards(name);
+                    return RedirectToAction("Index");
+                case true:
+                    var errorDetails = "卡片已存在";
+                    return RedirectToAction("CardEditError", new {details=errorDetails});
             }
-            else
-            {
-                var details = "卡片已存在！";
-                return RedirectToAction("CardEditError", new {details=details});
-            }
-
-            return RedirectToAction("Index");
         }
 
         public IActionResult CardEditError(string details)
@@ -61,13 +58,9 @@ namespace Expending_Card.Controllers
             return View();
         }
 
-        private void CreateCards(string cardName, int cardOrder = -1)
+        private void CreateCards(string cardName)
         {
-            cardOrder = cardOrder switch
-            {
-                -1 => _cards.Count + 1,
-                _ => cardOrder
-            };
+            var cardOrder = _cards.Count + 1;
             _cards.Add(new CardsViewModel() {CatalogName = cardName, CatalogOrder = cardOrder});
         }
 
@@ -75,6 +68,11 @@ namespace Expending_Card.Controllers
         {
             var order = _cards.FindIndex(x => x.CatalogName == name);
             return order;
+        }
+
+        private static bool IsCardExist(string name)
+        {
+            return _cards.Any(x => x.CatalogName == name);
         }
     }
 }
