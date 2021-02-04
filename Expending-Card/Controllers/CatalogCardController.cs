@@ -48,7 +48,7 @@ namespace Expending_Card.Controllers
             {
                 case false:
                     CreateCards(name);
-                    return RedirectToAction("Index");
+                    return RedirectToAction("UpdateCard");
                 case true:
                     SetErrorDetails("新增", "卡片已存在，請點選上面列表瀏覽");
                     return RedirectToAction("CardEditError", _errorPage);
@@ -67,7 +67,7 @@ namespace Expending_Card.Controllers
             {
                 var deleteCard = _cards.Single(x => x.CatalogName == name);
                 _cards.Remove(deleteCard);
-                return RedirectToAction("Index");
+                return RedirectToAction("UpdateCard");
             }
         }
 
