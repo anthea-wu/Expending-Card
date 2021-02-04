@@ -71,6 +71,11 @@ namespace Expending_Card.Controllers
             }
         }
 
+        public IActionResult UpdateCard()
+        {
+            return View();
+        }
+
         public IActionResult CardEditError(ErrorPageViewModel error)
         {
             return View(error);

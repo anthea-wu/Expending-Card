@@ -7,3 +7,12 @@
 
 <h2>@Model.CatalogName</h2>
 <p>卡片序號: @Model.CatalogOrder</p>
+
+
+<div class="col-md-2">
+    <form asp-controller="CatalogCard" asp-action="UpdateCard">
+        <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-default" />
+        </div>
+    </form>
+</div>
