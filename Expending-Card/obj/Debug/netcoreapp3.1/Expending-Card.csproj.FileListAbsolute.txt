@@ -98,4 +98,4 @@ C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\CardEditError.cshtml.g.cs
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\Index.cshtml.g.cs
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\DetailEdit\AddDetails.cshtml.g.cs
-C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\UpdateCard.cshtml.g.cs
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\EditCard.cshtml.g.cs
