@@ -11,7 +11,7 @@ namespace Expending_Card.Controllers
     {
         private readonly ILogger<CatalogCardController> _logger;
         private static readonly List<CardsViewModel> _cards = new List<CardsViewModel>();
-        private ErrorPageViewModel _errorPage = new ErrorPageViewModel();
+        private static readonly ErrorPageViewModel _errorPage = new ErrorPageViewModel();
             
         public CatalogCardController (ILogger<CatalogCardController> logger) 
         {
@@ -35,7 +35,7 @@ namespace Expending_Card.Controllers
             if (!IsCardExist(name))
             {
                 SetErrorDetails("顯示", "卡片不存在，請利用新增功能增加該卡片");
-                return RedirectToAction("CardEditError", _errorPage);
+                return RedirectToAction("CardEditError");
             }
             var showCard = _cards.Single(x => x.CatalogName == name);
             return View(showCard);
@@ -51,7 +51,7 @@ namespace Expending_Card.Controllers
                     return RedirectToAction("EditCard");
                 case true:
                     SetErrorDetails("新增", "卡片已存在，請點選上面列表瀏覽");
-                    return RedirectToAction("CardEditError", _errorPage);
+                    return RedirectToAction("CardEditError");
             }
         }
 
@@ -61,7 +61,7 @@ namespace Expending_Card.Controllers
             if (!IsCardExist(name))
             {
                 SetErrorDetails("刪除", "卡片不存在，請確認是否存在錯字");
-                return RedirectToAction("CardEditError", _errorPage);
+                return RedirectToAction("CardEditError");
             }
             else
             {
@@ -81,7 +81,7 @@ namespace Expending_Card.Controllers
             else
             {
                 SetErrorDetails("更新", "變更的卡片名稱不存在，請重新確認");
-                return RedirectToAction("CardEditError", _errorPage);
+                return RedirectToAction("CardEditError");
             }
             return RedirectToAction("EditCard");
         }
@@ -97,9 +97,9 @@ namespace Expending_Card.Controllers
             return View(_cards);
         }
 
-        public IActionResult CardEditError(ErrorPageViewModel error)
+        public IActionResult CardEditError()
         {
-            return View(error);
+            return View(_errorPage);
         }
 
         private void CreateCards(string cardName)
