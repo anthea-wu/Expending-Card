@@ -35,6 +35,7 @@ namespace Expending_Card.Controllers
                 CreateCards(name);
             }
             var showCard = _cards[GetCardOrder(name)];
+            // _cards.Single(x => x.CatalogName == name);
             return View(showCard);
         }
 

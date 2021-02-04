@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "Microsoft.Extensions.DependencyInjection/5.0.0": {
+      "Microsoft.Extensions.DependencyInjection/5.0.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.DependencyInjection.Abstractions": "5.0.0"
@@ -82,10 +82,10 @@
     }
   },
   "libraries": {
-    "Microsoft.Extensions.DependencyInjection/5.0.0": {
-      "sha512": "Rc2kb/p3Ze6cP6rhFC3PJRdWGbLvSHZc0ev7YlyeU6FmHciDMLrhoVoTUEzKPhN5ZjFgKF1Cf5fOz8mCMIkvpA==",
+    "Microsoft.Extensions.DependencyInjection/5.0.1": {
+      "sha512": "//mDNrYeiJ0eh/awFhDFJQzkRVra/njU5Y4fyK7X29g5HScrzbUkKOKlyTtygthcGFt4zNC8G5CFCjb/oizomA==",
       "type": "package",
-      "path": "microsoft.extensions.dependencyinjection/5.0.0",
+      "path": "microsoft.extensions.dependencyinjection/5.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -100,7 +100,7 @@
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.xml",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.dll",
         "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.xml",
-        "microsoft.extensions.dependencyinjection.5.0.0.nupkg.sha512",
+        "microsoft.extensions.dependencyinjection.5.0.1.nupkg.sha512",
         "microsoft.extensions.dependencyinjection.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -243,23 +243,24 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Microsoft.Extensions.DependencyInjection >= 5.0.1",
       "Microsoft.Extensions.Logging >= 5.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\d0509\\.nuget\\packages\\": {}
+    "C:\\Users\\anthea.wu15\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\d0509\\Documents\\GitHub\\Expending-Card\\Expending-Card\\Expending-Card.csproj",
+      "projectUniqueName": "C:\\Users\\anthea.wu15\\Documents\\AspNetCore_learning\\Expending-Card\\Expending-Card\\Expending-Card.csproj",
       "projectName": "Expending-Card",
-      "projectPath": "C:\\Users\\d0509\\Documents\\GitHub\\Expending-Card\\Expending-Card\\Expending-Card.csproj",
-      "packagesPath": "C:\\Users\\d0509\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\d0509\\Documents\\GitHub\\Expending-Card\\Expending-Card\\obj\\",
+      "projectPath": "C:\\Users\\anthea.wu15\\Documents\\AspNetCore_learning\\Expending-Card\\Expending-Card\\Expending-Card.csproj",
+      "packagesPath": "C:\\Users\\anthea.wu15\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\anthea.wu15\\Documents\\AspNetCore_learning\\Expending-Card\\Expending-Card\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\d0509\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\anthea.wu15\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -267,6 +268,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "http://nuget.coreop.net/nuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -283,6 +285,10 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
+          "Microsoft.Extensions.DependencyInjection": {
+            "target": "Package",
+            "version": "[5.0.1, )"
+          },
           "Microsoft.Extensions.Logging": {
             "target": "Package",
             "version": "[5.0.0, )"
