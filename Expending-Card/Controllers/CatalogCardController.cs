@@ -42,7 +42,7 @@ namespace Expending_Card.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddCards(string name)
+        public IActionResult AddCard(string name)
         {
             switch (IsCardExist(name))
             {
@@ -52,6 +52,22 @@ namespace Expending_Card.Controllers
                 case true:
                     SetErrorDetails("新增", "卡片已存在，請點選上面列表瀏覽");
                     return RedirectToAction("CardEditError", _errorPage);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult DeleteCard(string name)
+        {
+            if (!IsCardExist(name))
+            {
+                SetErrorDetails("刪除", "卡片不存在，請確認是否存在錯字");
+                return RedirectToAction("CardEditError", _errorPage);
+            }
+            else
+            {
+                var deleteCard = _cards.Single(x => x.CatalogName == name);
+                _cards.Remove(deleteCard);
+                return RedirectToAction("Index");
             }
         }
 
