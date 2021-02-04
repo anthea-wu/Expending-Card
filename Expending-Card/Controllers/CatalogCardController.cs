@@ -74,17 +74,28 @@ namespace Expending_Card.Controllers
         [HttpPost]
         public IActionResult UpdateCard(string oldName, string newName)
         {
-            if (IsCardExist(oldName))
+            if (IsUpdateExist(oldName, newName))
             {
-                ResetCard(oldName, newName);
-            }
-            else
-            {
-                SetErrorDetails("更新", "變更的卡片名稱不存在，請重新確認");
-                return RedirectToAction("CardEditError");
-            }
-            return RedirectToAction("EditCard");
+                switch (IsCardExist(oldName))
+                {
+                    case true:
+                        ResetCard(oldName, newName);
+                        return RedirectToAction("EditCard");
+                    case false:
+                        SetErrorDetails("更新", details: "變更的卡片名稱不存在，請重新確認");
+                        return RedirectToAction("CardEditError");
+                }
+            }                
+                
+            SetErrorDetails("更新", "更新欄位不能為空白，請重新確認");
+            return RedirectToAction("CardEditError");
         }
+
+        private bool IsUpdateExist(string oldName, string newName)
+        {
+            return !string.IsNullOrEmpty(oldName) && !string.IsNullOrEmpty(newName);
+        }
+
 
         private void ResetCard(string oldName, string newName)
         {
