@@ -1,11 +1,8 @@
-﻿@{
-    var errorDetails = ViewBag.error;
-}
-
+﻿@model Expending_Card.ViewModels.ErrorPageViewModel
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
 
-<h2>卡片編輯錯誤</h2>
-<p>@errorDetails</p>
+<h2>卡片 @Model.errorName 錯誤</h2>
+<p>@Model.errorDetails</p>

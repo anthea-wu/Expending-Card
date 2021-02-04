@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Expending_Card.Models;
+using Expending_Card.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -10,7 +11,8 @@ namespace Expending_Card.Controllers
     {
         private readonly ILogger<CatalogCardController> _logger;
         private static readonly List<CardsViewModel> _cards = new List<CardsViewModel>();
-
+        private ErrorPageViewModel _errorPage = new ErrorPageViewModel();
+            
         public CatalogCardController (ILogger<CatalogCardController> logger) 
         {
             _logger = logger;
@@ -32,10 +34,10 @@ namespace Expending_Card.Controllers
         {
             if (!IsCardExist(name))
             {
-                CreateCards(name);
+                SetErrorDetails("顯示", "卡片不存在，請利用新增功能增加該卡片");
+                return RedirectToAction("CardEditError", _errorPage);
             }
-            var showCard = _cards[GetCardOrder(name)];
-            // _cards.Single(x => x.CatalogName == name);
+            var showCard = _cards.Single(x => x.CatalogName == name);
             return View(showCard);
         }
 
@@ -48,15 +50,14 @@ namespace Expending_Card.Controllers
                     CreateCards(name);
                     return RedirectToAction("Index");
                 case true:
-                    var errorDetails = "卡片已存在";
-                    return RedirectToAction("CardEditError", new {details=errorDetails});
+                    SetErrorDetails("新增", "卡片已存在，請點選上面列表瀏覽");
+                    return RedirectToAction("CardEditError", _errorPage);
             }
         }
 
-        public IActionResult CardEditError(string details)
+        public IActionResult CardEditError(ErrorPageViewModel error)
         {
-            ViewBag.error = details;
-            return View();
+            return View(error);
         }
 
         private void CreateCards(string cardName)
@@ -65,15 +66,15 @@ namespace Expending_Card.Controllers
             _cards.Add(new CardsViewModel() {CatalogName = cardName, CatalogOrder = cardOrder});
         }
 
-        private int GetCardOrder(string name)
-        {
-            var order = _cards.FindIndex(x => x.CatalogName == name);
-            return order;
-        }
-
         private static bool IsCardExist(string name)
         {
             return _cards.Any(x => x.CatalogName == name);
+        }
+
+        private void SetErrorDetails(string name, string details)
+        {
+            _errorPage.errorName = name;
+            _errorPage.errorDetails = details;
         }
     }
 }
