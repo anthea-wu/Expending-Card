@@ -40,7 +40,7 @@
         </form>
     </div>
     <div class="col-md-2">
-        <form asp-controller="CatalogCard" asp-action="DeleteCard">
+        <form asp-action="DeleteCard">
             <div class="text-danger"></div>
             <div class="form-group">
                 <label name="name" class="control-label"></label>
@@ -48,6 +48,24 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="Delete" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <form asp-controller="CatalogCard" asp-action="UpdateCard">
+            <div class="text-secondary">修改卡片名稱</div>
+            <div class="form-group">
+                <label name="oldName" class="control-label"></label>
+                <input name="oldName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label name="newName" class="control-label"></label>
+                <input name="newName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-default" />
             </div>
         </form>
     </div>

@@ -71,6 +71,27 @@ namespace Expending_Card.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult UpdateCard(string oldName, string newName)
+        {
+            if (IsCardExist(oldName))
+            {
+                ResetCard(oldName, newName);
+            }
+            else
+            {
+                SetErrorDetails("更新", "變更的卡片名稱不存在，請重新確認");
+                return RedirectToAction("CardEditError", _errorPage);
+            }
+            return RedirectToAction("EditCard");
+        }
+
+        private void ResetCard(string oldName, string newName)
+        {
+            var update = _cards.Single(x => x.CatalogName == oldName);
+            update.CatalogName = newName;
+        }
+
         public IActionResult EditCard()
         {
             return View(_cards);
