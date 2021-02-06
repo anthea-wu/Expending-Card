@@ -44,15 +44,14 @@ namespace Expending_Card.Controllers
         [HttpPost]
         public IActionResult AddCard(string name)
         {
-            switch (IsCardExist(name))
+            if (IsCardExist(name))
             {
-                case false:
-                    CreateCards(name);
-                    return RedirectToAction("EditCard");
-                case true:
-                    SetErrorDetails("新增", "卡片已存在，請點選上面列表瀏覽");
-                    return RedirectToAction("CardEditError");
+                CreateCards(name);
+                return RedirectToAction("EditCard");
             }
+            
+            SetErrorDetails("新增", "卡片已存在，請點選上面列表瀏覽");
+            return RedirectToAction("CardEditError");
         }
 
         [HttpPost]
@@ -63,12 +62,10 @@ namespace Expending_Card.Controllers
                 SetErrorDetails("刪除", "卡片不存在，請確認是否存在錯字");
                 return RedirectToAction("CardEditError");
             }
-            else
-            {
-                var deleteCard = _cards.Single(x => x.CatalogName == name);
-                _cards.Remove(deleteCard);
-                return RedirectToAction("EditCard");
-            }
+
+            var deleteCard = _cards.Single(x => x.CatalogName == name);
+            _cards.Remove(deleteCard);
+            return RedirectToAction("EditCard");
         }
 
         [HttpPost]
@@ -76,15 +73,14 @@ namespace Expending_Card.Controllers
         {
             if (IsUpdateExist(oldName, newName))
             {
-                switch (IsCardExist(oldName))
+                if (IsCardExist(oldName))
                 {
-                    case true:
-                        ResetCard(oldName, newName);
-                        return RedirectToAction("EditCard");
-                    case false:
-                        SetErrorDetails("更新", details: "變更的卡片名稱不存在，請重新確認");
-                        return RedirectToAction("CardEditError");
+                    ResetCard(oldName, newName);
+                    return RedirectToAction("EditCard");
                 }
+                
+                SetErrorDetails("更新", details: "變更的卡片名稱不存在，請重新確認");
+                return RedirectToAction("CardEditError");
             }                
                 
             SetErrorDetails("更新", "更新欄位不能為空白，請重新確認");
@@ -93,6 +89,7 @@ namespace Expending_Card.Controllers
 
         private bool IsUpdateExist(string oldName, string newName)
         {
+            // check by html form required
             return !string.IsNullOrEmpty(oldName) && !string.IsNullOrEmpty(newName);
         }
 
