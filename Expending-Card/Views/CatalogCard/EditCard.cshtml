@@ -77,6 +77,9 @@
     <script>
     
     const request = new XMLHttpRequest();
+    let error = {0:'卡片名稱不存在',
+                 1:'欄位不得為空',
+                 };
     
     let cards = [];
     @foreach (var item in Model)
@@ -87,15 +90,16 @@
     function deleteCard() {
         let data = getFormData("delete-info");
         let name = getUpdateCardName("delete-info", "name");
-        
+
         if (cards.includes(name)) {
             request.open('POST', 'https://localhost:5001/CatalogCard/DeleteCard', true);
             request.send(data);
             alert("刪除成功");
         }else {
-            alert("卡片名稱 「" + name + "」不存在");
+            editError(name);
         } 
     }
+    
     function updateCardName() {
         let data = getFormData("update-info");
         let oldName = getUpdateCardName("update-info", "oldName");
@@ -105,7 +109,7 @@
             request.send(data);
             alert("更新成功");
         }else {
-            alert("卡片名稱 「" + oldName + "」不存在");
+            editError(oldName);
         }      
     }
     
@@ -119,6 +123,17 @@
         let form = document.forms.namedItem(formId);
         let card = form.elements.namedItem(input).value;
         return card;
+    }
+    
+    function editError(name) {
+        switch (name) {
+            case "":
+                alert(error[1]);
+                break;
+            default:
+                alert(error[0]);
+                break;
+        }
     }
    </script>
 }
