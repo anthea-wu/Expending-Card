@@ -28,14 +28,14 @@
 </table>
 <div class="row mt-3">
     <div class="col-md-10">
-        <form class="form-inline" asp-controller="CatalogCard" asp-action="AddCard">
+        <form id="create-info" class="form-inline" method="post">
             <div class="text-secondary col-md-2">建立新卡片</div>
             <div class="form-group col-md-3">
                 <input name="name" class="form-control" placeholder="卡片名稱" required="required"/>
             </div>
             <div class="text-secondary col-md-3"></div>
             <div class="form-group col-md-2">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" onclick="createCard();" />
             </div>
         </form>
     </div>
@@ -75,10 +75,12 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
     <script>
-    
     const request = new XMLHttpRequest();
-    let error = {0:'卡片名稱不存在',
+    
+    
+    let errors = {0:'卡片名稱不存在',
                  1:'欄位不得為空',
+                 2:'卡片已存在',
                  };
     
     let cards = [];
@@ -87,6 +89,24 @@
         @:cards.push('@item.CatalogName');
     }
     
+    function createCard() {
+        let data = getFormData("create-info");
+        let name = getUpdateCardName("create-info", "name");
+        
+        if (cards.includes(name)) {
+            editError("exist");
+        }else{
+            if (name == ""){
+                editError(name);
+            }else{
+                request.open('POST', 'https://localhost:5001/CatalogCard/AddCard', true);
+                request.send(data);
+                alert("新增成功");
+            }
+        }
+    }
+
+        
     function deleteCard() {
         let data = getFormData("delete-info");
         let name = getUpdateCardName("delete-info", "name");
@@ -128,10 +148,13 @@
     function editError(name) {
         switch (name) {
             case "":
-                alert(error[1]);
+                alert(errors[1]);
+                break;
+            case "exist":
+                alert(errors[2]);
                 break;
             default:
-                alert(error[0]);
+                alert(errors[0]);
                 break;
         }
     }

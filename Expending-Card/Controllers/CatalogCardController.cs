@@ -45,14 +45,8 @@ namespace Expending_Card.Controllers
         [HttpPost]
         public IActionResult AddCard(string name)
         {
-            if (!IsCardExist(name))
-            {
-                CreateCards(name);
-                return RedirectToAction("EditCard");
-            }
-            
-            SetErrorDetails("新增", "卡片已存在，請點選上面列表瀏覽");
-            return RedirectToAction("CardEditError");
+            CreateCards(name);
+            return RedirectToAction("EditCard");
         }
 
         [HttpPost]
