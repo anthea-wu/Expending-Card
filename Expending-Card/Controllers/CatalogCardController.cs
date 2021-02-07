@@ -73,9 +73,7 @@ namespace Expending_Card.Controllers
         public IActionResult UpdateCard([FromForm]string oldName, string newName)
         {
             var update = _cards.Single(x => x.CatalogName == oldName);
-            _logger.LogInformation(update.CatalogName);
             update.CatalogName = newName;
-            Thread.Sleep(5000); 
             return RedirectToAction("EditCard");
         }
 
