@@ -58,12 +58,6 @@ namespace Expending_Card.Controllers
         [HttpPost]
         public IActionResult DeleteCard(string name)
         {
-            if (!IsCardExist(name))
-            {
-                SetErrorDetails("刪除", "卡片不存在，請確認是否存在錯字");
-                return RedirectToAction("CardEditError");
-            }
-
             var deleteCard = _cards.Single(x => x.CatalogName == name);
             _cards.Remove(deleteCard);
             return RedirectToAction("EditCard");

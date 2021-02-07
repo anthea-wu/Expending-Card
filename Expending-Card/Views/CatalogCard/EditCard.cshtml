@@ -49,7 +49,7 @@
             </div>
             <div class="text-secondary col-md-3"></div>
             <div class="form-group col-md-2">
-                <input type="submit" value="Delete" class="btn btn-default"/>
+                <input type="submit" value="Delete" class="btn btn-default" onclick="deleteCard();"/>
             </div>
         </form>
     </div>
@@ -75,6 +75,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
     <script>
+    
     const request = new XMLHttpRequest();
     
     let cards = [];
@@ -83,9 +84,21 @@
         @:cards.push('@item.CatalogName');
     }
     
+    function deleteCard() {
+        let data = getFormData("delete-info");
+        let name = getUpdateCardName("delete-info", "name");
+        
+        if (cards.includes(name)) {
+            request.open('POST', 'https://localhost:5001/CatalogCard/DeleteCard', true);
+            request.send(data);
+            alert("刪除成功");
+        }else {
+            alert("卡片名稱 「" + name + "」不存在");
+        } 
+    }
     function updateCardName() {
         let data = getFormData("update-info");
-        let oldName = document.forms.namedItem("update-info").elements.namedItem("oldName").value;
+        let oldName = getUpdateCardName("update-info", "oldName");
         
         if (cards.includes(oldName)) {
             request.open('POST', 'https://localhost:5001/CatalogCard/UpdateCard', true);
@@ -100,6 +113,12 @@
         let form = document.forms.namedItem(name);
         let data = new FormData(form);
         return data;
+    }
+    
+    function getUpdateCardName(formId, input) {
+        let form = document.forms.namedItem(formId);
+        let card = form.elements.namedItem(input).value;
+        return card;
     }
    </script>
 }
