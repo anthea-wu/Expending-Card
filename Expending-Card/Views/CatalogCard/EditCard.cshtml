@@ -42,14 +42,14 @@
 </div>
 <div class="row mt-3">
     <div class="col-md-10">
-        <form class="form-inline" asp-action="DeleteCard">
+        <form id="delete-info" class="form-inline" method="post">
             <div class="text-secondary col-md-2">刪除卡片</div>
             <div class="form-group col-md-3">
                 <input name="name" class="form-control" placeholder="卡片名稱" required="required"/>
             </div>
             <div class="text-secondary col-md-3"></div>
             <div class="form-group col-md-2">
-                <input type="submit" value="Delete" class="btn btn-default" />
+                <input type="submit" value="Delete" class="btn btn-default"/>
             </div>
         </form>
     </div>
@@ -76,6 +76,7 @@
 
     <script>
     const request = new XMLHttpRequest();
+    
     let cards = [];
     @foreach (var item in Model)
     {
@@ -83,9 +84,8 @@
     }
     
     function updateCardName() {
-        let form = document.forms.namedItem("update-info");
-        let oldName = form.elements.namedItem("oldName").value;
-        let data = new FormData(form);
+        let data = getFormData("update-info");
+        let oldName = document.forms.namedItem("update-info").elements.namedItem("oldName").value;
         
         if (cards.includes(oldName)) {
             request.open('POST', 'https://localhost:5001/CatalogCard/UpdateCard', true);
@@ -94,6 +94,12 @@
         }else {
             alert("卡片名稱 「" + oldName + "」不存在");
         }      
+    }
+    
+    function getFormData(name){
+        let form = document.forms.namedItem(name);
+        let data = new FormData(form);
+        return data;
     }
    </script>
 }
