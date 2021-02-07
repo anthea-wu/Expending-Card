@@ -44,7 +44,7 @@ namespace Expending_Card.Controllers
         [HttpPost]
         public IActionResult AddCard(string name)
         {
-            if (IsCardExist(name))
+            if (!IsCardExist(name))
             {
                 CreateCards(name);
                 return RedirectToAction("EditCard");
@@ -71,26 +71,14 @@ namespace Expending_Card.Controllers
         [HttpPost]
         public IActionResult UpdateCard(string oldName, string newName)
         {
-            if (IsUpdateExist(oldName, newName))
+            if (IsCardExist(oldName))
             {
-                if (IsCardExist(oldName))
-                {
-                    ResetCard(oldName, newName);
-                    return RedirectToAction("EditCard");
-                }
-                
-                SetErrorDetails("更新", details: "變更的卡片名稱不存在，請重新確認");
-                return RedirectToAction("CardEditError");
-            }                
-                
-            SetErrorDetails("更新", "更新欄位不能為空白，請重新確認");
+                ResetCard(oldName, newName);
+                return RedirectToAction("EditCard");
+            }
+            
+            SetErrorDetails("更新", details: "變更的卡片名稱不存在，請重新確認");
             return RedirectToAction("CardEditError");
-        }
-
-        private bool IsUpdateExist(string oldName, string newName)
-        {
-            // check by html form required
-            return !string.IsNullOrEmpty(oldName) && !string.IsNullOrEmpty(newName);
         }
 
 

@@ -31,7 +31,7 @@
         <form class="form-inline" asp-controller="CatalogCard" asp-action="AddCard">
             <div class="text-secondary col-md-2">建立新卡片</div>
             <div class="form-group col-md-3">
-                <input name="name" class="form-control" placeholder="卡片名稱"/>
+                <input name="name" class="form-control" placeholder="卡片名稱" required="required"/>
             </div>
             <div class="text-secondary col-md-3"></div>
             <div class="form-group col-md-2">
@@ -45,7 +45,7 @@
         <form class="form-inline" asp-action="DeleteCard">
             <div class="text-secondary col-md-2">刪除卡片</div>
             <div class="form-group col-md-3">
-                <input name="name" class="form-control" placeholder="卡片名稱" />
+                <input name="name" class="form-control" placeholder="卡片名稱" required="required"/>
             </div>
             <div class="text-secondary col-md-3"></div>
             <div class="form-group col-md-2">
@@ -59,10 +59,10 @@
         <form class="form-inline" asp-controller="CatalogCard" asp-action="UpdateCard">
             <div class="text-secondary col-md-2">修改卡片名稱</div>
             <div class="form-group col-md-3">
-                <input name="oldName" class="form-control" placeholder="現在名稱" />
+                <input name="oldName" class="form-control" placeholder="現在名稱" required="required"/>
             </div>
             <div class="form-group col-md-3">
-                <input name="newName" class="form-control" placeholder="更新名稱" />
+                <input name="newName" class="form-control" placeholder="更新名稱" required="required"/>
             </div>
             <div class="form-group col-md-2">
                 <input type="submit" value="Update" class="btn btn-default" />
