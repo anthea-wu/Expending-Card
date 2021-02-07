@@ -81,6 +81,7 @@
     let errors = {0:'卡片名稱不存在',
                  1:'欄位不得為空',
                  2:'卡片已存在',
+                 3:'更新後的卡片名稱重複',
                  };
     
     let cards = [];
@@ -123,11 +124,18 @@
     function updateCardName() {
         let data = getFormData("update-info");
         let oldName = getUpdateCardName("update-info", "oldName");
+        let newName = getUpdateCardName("update-info", "newName");
         
         if (cards.includes(oldName)) {
-            request.open('POST', 'https://localhost:5001/CatalogCard/UpdateCard', true);
-            request.send(data);
-            alert("更新成功");
+            if (newName=="") {
+                editError(newName)
+            }else if (cards.includes(newName)){
+                editError("duplicate")
+            }else{
+                request.open('POST', 'https://localhost:5001/CatalogCard/UpdateCard', true);
+                request.send(data);
+                alert("更新成功");
+            }
         }else {
             editError(oldName);
         }      
@@ -152,6 +160,9 @@
                 break;
             case "exist":
                 alert(errors[2]);
+                break;
+            case "duplicate":
+                alert(errors[3]);
                 break;
             default:
                 alert(errors[0]);
