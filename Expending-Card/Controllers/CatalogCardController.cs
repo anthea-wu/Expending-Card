@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Expending_Card.Models;
 using Expending_Card.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -69,24 +70,15 @@ namespace Expending_Card.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateCard(string oldName, string newName)
-        {
-            if (IsCardExist(oldName))
-            {
-                ResetCard(oldName, newName);
-                return RedirectToAction("EditCard");
-            }
-            
-            SetErrorDetails("更新", details: "變更的卡片名稱不存在，請重新確認");
-            return RedirectToAction("CardEditError");
-        }
-
-
-        private void ResetCard(string oldName, string newName)
+        public IActionResult UpdateCard([FromForm]string oldName, string newName)
         {
             var update = _cards.Single(x => x.CatalogName == oldName);
+            _logger.LogInformation(update.CatalogName);
             update.CatalogName = newName;
+            Thread.Sleep(5000); 
+            return RedirectToAction("EditCard");
         }
+
 
         public IActionResult EditCard()
         {

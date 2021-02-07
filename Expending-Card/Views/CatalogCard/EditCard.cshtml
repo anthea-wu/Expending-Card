@@ -56,17 +56,44 @@
 </div>
 <div class="row mt-3">
     <div class="col-md-10">
-        <form class="form-inline" asp-controller="CatalogCard" asp-action="UpdateCard">
+        <form id="update-info" class="form-inline" method="post">
             <div class="text-secondary col-md-2">修改卡片名稱</div>
             <div class="form-group col-md-3">
-                <input name="oldName" class="form-control" placeholder="現在名稱" required="required"/>
+                <input name="oldName" id="oldName" class="form-control" placeholder="現在名稱" required="required"/>
             </div>
-            <div class="form-group col-md-3">
-                <input name="newName" class="form-control" placeholder="更新名稱" required="required"/>
+            <div class ="form-group col-md-3">
+                <input name="newName" id="newName" class="form-control" placeholder="更新名稱" required="required"/>
             </div>
             <div class="form-group col-md-2">
-                <input type="submit" value="Update" class="btn btn-default" />
+                <input type="submit" value="Update" class="btn btn-default" onclick="updateCardName();"/>
             </div>
         </form>
     </div>
 </div>
+
+@section scripts{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script>
+    const request = new XMLHttpRequest();
+    let cards = [];
+    @foreach (var item in Model)
+    {
+        @:cards.push('@item.CatalogName');
+    }
+    
+    function updateCardName() {
+        let form = document.forms.namedItem("update-info");
+        let oldName = form.elements.namedItem("oldName").value;
+        let data = new FormData(form);
+        
+        if (cards.includes(oldName)) {
+            request.open('POST', 'https://localhost:5001/CatalogCard/UpdateCard', true);
+            request.send(data);
+            alert("更新成功");
+        }else {
+            alert("卡片名稱 「" + oldName + "」不存在");
+        }      
+    }
+   </script>
+}

@@ -2,6 +2,21 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "axios/0.16.2": {
+        "type": "package"
+      },
+      "axios.js/0.19.0-beat1": {
+        "type": "package"
+      },
+      "AxiosCore/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.1/AxiosCore.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AxiosCore.dll": {}
+        }
+      },
       "Microsoft.Extensions.DependencyInjection/5.0.1": {
         "type": "package",
         "dependencies": {
@@ -82,6 +97,47 @@
     }
   },
   "libraries": {
+    "axios/0.16.2": {
+      "sha512": "Xp86hC7/Z4CDwlbM0udtI/Q/AKxsQG7EiZItwtqj3KeZKC1xKxNDImtNPB5e7i6PK2EdOfGns5BtVR6u1V/NEQ==",
+      "type": "package",
+      "path": "axios/0.16.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Scripts/axios.js",
+        "Content/Scripts/axios.min.js",
+        "axios.0.16.2.nupkg.sha512",
+        "axios.nuspec"
+      ]
+    },
+    "axios.js/0.19.0-beat1": {
+      "sha512": "qKlLCJICAtqT2WQjO7JYDZYHs47DFZGNRTOMeo5X0kpdQJYmV2r7tikMAJuNlxUcSoWgj3IO5EV/FqeIS7z1Jg==",
+      "type": "package",
+      "path": "axios.js/0.19.0-beat1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "axios.js.0.19.0-beat1.nupkg.sha512",
+        "axios.js.nuspec",
+        "content/Scripts/axios.js",
+        "content/Scripts/axios.map",
+        "content/Scripts/axios.min.js",
+        "content/Scripts/axios.min.map"
+      ]
+    },
+    "AxiosCore/1.0.0": {
+      "sha512": "6/ORipW3UI7S04Zt7Cb3GuilsPsnQvc7JKHwEIxzDwyf3eoN3CeQjumJewvmwH4jBI4c47AmSXstCNzKgM5Gtw==",
+      "type": "package",
+      "path": "axioscore/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "axioscore.1.0.0.nupkg.sha512",
+        "axioscore.nuspec",
+        "lib/netcoreapp3.1/AxiosCore.dll"
+      ]
+    },
     "Microsoft.Extensions.DependencyInjection/5.0.1": {
       "sha512": "//mDNrYeiJ0eh/awFhDFJQzkRVra/njU5Y4fyK7X29g5HScrzbUkKOKlyTtygthcGFt4zNC8G5CFCjb/oizomA==",
       "type": "package",
@@ -243,8 +299,11 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "AxiosCore >= 1.0.0",
       "Microsoft.Extensions.DependencyInjection >= 5.0.1",
-      "Microsoft.Extensions.Logging >= 5.0.0"
+      "Microsoft.Extensions.Logging >= 5.0.0",
+      "axios >= 0.16.2",
+      "axios.js >= 0.19.0-beat1"
     ]
   },
   "packageFolders": {
@@ -284,6 +343,10 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
+          "AxiosCore": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
           "Microsoft.Extensions.DependencyInjection": {
             "target": "Package",
             "version": "[5.0.1, )"
@@ -291,6 +354,14 @@
           "Microsoft.Extensions.Logging": {
             "target": "Package",
             "version": "[5.0.0, )"
+          },
+          "axios": {
+            "target": "Package",
+            "version": "[0.16.2, )"
+          },
+          "axios.js": {
+            "target": "Package",
+            "version": "[0.19.0-beat1, )"
           }
         },
         "imports": [

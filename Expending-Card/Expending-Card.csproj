@@ -6,6 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="axios" Version="0.16.2" />
+      <PackageReference Include="axios.js" Version="0.19.0-beat1" />
+      <PackageReference Include="AxiosCore" Version="1.0.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
       <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     </ItemGroup>

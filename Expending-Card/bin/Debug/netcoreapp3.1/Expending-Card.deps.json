@@ -24,8 +24,11 @@
     ".NETCoreApp,Version=v3.1": {
       "Expending-Card/1.0.0": {
         "dependencies": {
+          "AxiosCore": "1.0.0",
           "Microsoft.Extensions.DependencyInjection": "5.0.1",
           "Microsoft.Extensions.Logging": "5.0.0",
+          "axios": "0.16.2",
+          "axios.js": "0.19.0-beat1",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -307,6 +310,19 @@
         },
         "compile": {
           "Expending-Card.dll": {}
+        }
+      },
+      "axios/0.16.2": {},
+      "axios.js/0.19.0-beat1": {},
+      "AxiosCore/1.0.0": {
+        "runtime": {
+          "lib/netcoreapp3.1/AxiosCore.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/AxiosCore.dll": {}
         }
       },
       "Microsoft.Extensions.DependencyInjection/5.0.1": {
@@ -2057,6 +2073,27 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "axios/0.16.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Xp86hC7/Z4CDwlbM0udtI/Q/AKxsQG7EiZItwtqj3KeZKC1xKxNDImtNPB5e7i6PK2EdOfGns5BtVR6u1V/NEQ==",
+      "path": "axios/0.16.2",
+      "hashPath": "axios.0.16.2.nupkg.sha512"
+    },
+    "axios.js/0.19.0-beat1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qKlLCJICAtqT2WQjO7JYDZYHs47DFZGNRTOMeo5X0kpdQJYmV2r7tikMAJuNlxUcSoWgj3IO5EV/FqeIS7z1Jg==",
+      "path": "axios.js/0.19.0-beat1",
+      "hashPath": "axios.js.0.19.0-beat1.nupkg.sha512"
+    },
+    "AxiosCore/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6/ORipW3UI7S04Zt7Cb3GuilsPsnQvc7JKHwEIxzDwyf3eoN3CeQjumJewvmwH4jBI4c47AmSXstCNzKgM5Gtw==",
+      "path": "axioscore/1.0.0",
+      "hashPath": "axioscore.1.0.0.nupkg.sha512"
     },
     "Microsoft.Extensions.DependencyInjection/5.0.1": {
       "type": "package",
