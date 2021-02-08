@@ -85,35 +85,9 @@
     }
     
     function createCard() {
-        let data = getFormData("create-info");
-        let name = getUpdateCardName("create-info", "name");
-        
-        
-        
-        if (cards.includes(name)) {
-            editError("exist");
-        }else{
-            if (name == ""){
-                editError(name);
-            }else{
-                request.open('POST', 'https://localhost:5001/CatalogCard/AddCard', true);
-                request.send(data);
-                alert("新增成功");
-            }
-        }
+        editInfo('https://localhost:5001/CatalogCard/AddCard', "create-info")
     }
 
-    function editInfo(url, form) {
-        let data = new FormData(document.forms.namedItem(form));
-        axios.post('https://localhost:5001/CatalogCard/DeleteCard', data)
-        .then(function (response) {
-            alert(response.data);
-        })
-        .catch(function (error) {
-            alert(error.response.data);
-        });
-    }
-    
     function deleteCard() {
         editInfo('https://localhost:5001/CatalogCard/DeleteCard', "delete-info")
     }
@@ -136,6 +110,17 @@
         }else {
             editError(oldName);
         }      
+    }
+    
+    function editInfo(url, form) {
+        let data = new FormData(document.forms.namedItem(form));
+        axios.post(url, data)
+        .then(function (response) {
+            alert(response.data);
+        })
+        .catch(function (error) {
+            alert(error.response.data);
+        });
     }
     
     function getFormData(name){

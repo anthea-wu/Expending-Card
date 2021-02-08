@@ -45,8 +45,11 @@ namespace Expending_Card.Controllers
         [HttpPost]
         public IActionResult AddCard(string name)
         {
+            if (string.IsNullOrEmpty(name)) return BadRequest("欄位不得為空");
+            if (IsCardExist(name)) return BadRequest("卡片已存在");
+            
             CreateCards(name);
-            return RedirectToAction("EditCard");
+            return Ok("卡片新增成功");
         }
 
         [HttpPost]
