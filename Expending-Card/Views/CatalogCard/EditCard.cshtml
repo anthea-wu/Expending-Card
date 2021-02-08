@@ -77,13 +77,6 @@
     <script>
     const request = new XMLHttpRequest();
     
-    
-    let errors = {0:'卡片名稱不存在',
-                 1:'欄位不得為空',
-                 2:'卡片已存在',
-                 3:'更新後的卡片名稱重複',
-                 };
-    
     let cards = [];
     @foreach (var item in Model)
     {
@@ -156,16 +149,16 @@
     function editError(name) {
         switch (name) {
             case "":
-                alert(errors[1]);
+                alert('欄位不得為空');
                 break;
             case "exist":
-                alert(errors[2]);
+                alert('卡片已存在');
                 break;
             case "duplicate":
-                alert(errors[3]);
+                alert('更新後的卡片名稱重複');
                 break;
             default:
-                alert(errors[0]);
+                alert('卡片名稱不存在');
                 break;
         }
     }
