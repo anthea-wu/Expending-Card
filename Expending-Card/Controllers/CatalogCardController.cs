@@ -50,11 +50,15 @@ namespace Expending_Card.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteCard(string name)
+        public IActionResult DeleteCard([FromForm]string name)
         {
+            if (string.IsNullOrEmpty(name)) return BadRequest("欄位不得為空");
+            if (!IsCardExist(name)) return BadRequest("卡片不存在");
+            
             var deleteCard = _cards.Single(x => x.CatalogName == name);
             _cards.Remove(deleteCard);
-            return RedirectToAction("EditCard");
+            return Ok("卡片刪除成功");
+
         }
 
         [HttpPost]

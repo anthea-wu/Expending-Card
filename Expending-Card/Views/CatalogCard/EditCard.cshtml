@@ -73,6 +73,7 @@
 
 @section scripts{
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script>
     const request = new XMLHttpRequest();
@@ -100,18 +101,16 @@
         }
     }
 
-        
     function deleteCard() {
         let data = getFormData("delete-info");
-        let name = getUpdateCardName("delete-info", "name");
-
-        if (cards.includes(name)) {
-            request.open('POST', 'https://localhost:5001/CatalogCard/DeleteCard', true);
-            request.send(data);
-            alert("刪除成功");
-        }else {
-            editError(name);
-        } 
+        
+        axios.post('https://localhost:5001/CatalogCard/DeleteCard', data)
+        .then(function (response) {
+            alert(response.data);
+        })
+        .catch(function (error) {
+            alert(error.response.data);
+        });
     }
     
     function updateCardName() {
