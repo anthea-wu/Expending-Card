@@ -12,9 +12,10 @@ namespace Expending_Card.Controllers
     {
         private readonly ILogger<CatalogCardController> _logger;
         private static readonly List<CardsViewModel> _cards = new List<CardsViewModel>();
+        private readonly CardViewModel _cardList = new CardViewModel();
         private static readonly ErrorPageViewModel _errorPage = new ErrorPageViewModel();
             
-        public CatalogCardController (ILogger<CatalogCardController> logger) 
+        public CatalogCardController (ILogger<CatalogCardController> logger)
         {
             _logger = logger;
         }
