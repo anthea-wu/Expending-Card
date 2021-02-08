@@ -65,11 +65,15 @@ namespace Expending_Card.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateCard([FromForm]string oldName, string newName)
+        public IActionResult UpdateCardName([FromForm]string oldName, string newName)
         {
+            if (string.IsNullOrEmpty(oldName) || string.IsNullOrEmpty(newName)) return BadRequest("欄位不得為空");
+            if (!IsCardExist(oldName)) return BadRequest("要修改的卡片不存在");
+            if (IsCardExist(newName)) return BadRequest("修改後的卡片名稱已存在");
+            
             var update = _cards.Single(x => x.CatalogName == oldName);
             update.CatalogName = newName;
-            return RedirectToAction("EditCard");
+            return Ok("卡片名稱修改成功");
         }
 
 

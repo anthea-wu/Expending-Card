@@ -56,7 +56,7 @@
 </div>
 <div class="row mt-3">
     <div class="col-md-10">
-        <form id="update-info" class="form-inline" method="post">
+        <form id="update-name" class="form-inline" method="post">
             <div class="text-secondary col-md-2">修改卡片名稱</div>
             <div class="form-group col-md-3">
                 <input name="oldName" id="oldName" class="form-control" placeholder="現在名稱" required="required"/>
@@ -75,9 +75,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <script>
-    const request = new XMLHttpRequest();
-    
+    <script>    
     let cards = [];
     @foreach (var item in Model)
     {
@@ -93,23 +91,7 @@
     }
     
     function updateCardName() {
-        let data = getFormData("update-info");
-        let oldName = getUpdateCardName("update-info", "oldName");
-        let newName = getUpdateCardName("update-info", "newName");
-        
-        if (cards.includes(oldName)) {
-            if (newName=="") {
-                editError(newName)
-            }else if (cards.includes(newName)){
-                editError("duplicate")
-            }else{
-                request.open('POST', 'https://localhost:5001/CatalogCard/UpdateCard', true);
-                request.send(data);
-                alert("更新成功");
-            }
-        }else {
-            editError(oldName);
-        }      
+        editInfo('https://localhost:5001/CatalogCard/UpdateCardName', "update-name");
     }
     
     function editInfo(url, form) {
@@ -121,35 +103,6 @@
         .catch(function (error) {
             alert(error.response.data);
         });
-    }
-    
-    function getFormData(name){
-        let form = document.forms.namedItem(name);
-        let data = new FormData(document.forms.namedItem(name));
-        return data;
-    }
-    
-    function getUpdateCardName(formId, input) {
-        let form = document.forms.namedItem(formId);
-        let card = form.elements.namedItem(input).value;
-        return card;
-    }
-    
-    function editError(name) {
-        switch (name) {
-            case "":
-                alert('欄位不得為空');
-                break;
-            case "exist":
-                alert('卡片已存在');
-                break;
-            case "duplicate":
-                alert('更新後的卡片名稱重複');
-                break;
-            default:
-                alert('卡片名稱不存在');
-                break;
-        }
     }
    </script>
 }
