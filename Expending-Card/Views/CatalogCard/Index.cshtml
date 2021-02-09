@@ -1,4 +1,4 @@
-﻿@model List<Expending_Card.Models.CardsViewModel>
+﻿@model Expending_Card.Models.CardViewModel
 
 @{
     ViewData["Title"] = "卡片總覽";
@@ -7,10 +7,10 @@
 
 <h2>類別卡片</h2>
 <ol class="mt-3">
-    @foreach (var item in @Model)
+    @foreach (var item in @Model.Cards)
     {
         <li class="mt-0 mb-0">
-            <a class="nav-link text-dark" asp-area="" asp-controller="CatalogCard" asp-action="ShowOneCard" asp-route-name="@item.CatalogName">@item.CatalogName</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="CatalogCard" asp-action="ShowOneCard" asp-route-name="@item.Name">@item.Name</a>
         </li>
     }
 </ol>

@@ -1,12 +1,12 @@
-﻿@model Expending_Card.Models.CardsViewModel
+﻿@model Expending_Card.Models.Card
 
 @{
-    ViewData["Title"] = @Model.CatalogName;
+    ViewData["Title"] = @Model.Name;
     Layout = "_Layout";
 }
 
-<h2>@Model.CatalogName</h2>
-<p>卡片序號: @Model.CatalogOrder</p>
+<h2>@Model.Name</h2>
+<p>卡片序號: @Model.Order</p>
 
 
 <div class="col-md-2">
