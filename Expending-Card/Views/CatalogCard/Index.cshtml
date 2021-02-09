@@ -10,7 +10,7 @@
     @foreach (var item in @Model.Cards)
     {
         <li class="mt-0 mb-0">
-            <a class="nav-link text-dark" asp-area="" asp-controller="CatalogCard" asp-action="ShowOneCard" asp-route-name="@item.Name">@item.Name</a>
+            <a class="nav-link text-dark" name = "@item.Name" onclick="showCard(this);">@item.Name</a>
         </li>
     }
 </ol>
@@ -24,3 +24,26 @@
         </form>
     </div>
 </div>
+
+@section scripts{
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>    
+    let cards = [];
+    @foreach (var item in Model.Cards)
+    {
+        @:cards.push('@item.Name');
+    }
+    
+    function showCard(obj) {
+        let name = obj.name;
+        axios.post(`https://localhost:5001/CatalogCard/Card?name=${name}`)
+        .then(function (response) {
+            window.location.href = response.request.responseURL;
+        })
+        .catch(function (error) {
+            alert(error.response.data);
+        });
+    }
+   </script>
+}
