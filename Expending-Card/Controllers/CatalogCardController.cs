@@ -11,7 +11,6 @@ namespace Expending_Card.Controllers
 { public class CatalogCardController : Controller
     {
         private readonly ILogger<CatalogCardController> _logger;
-        private static readonly List<CardsViewModel> _cards = new List<CardsViewModel>();
         private static readonly CardViewModel _model = new CardViewModel();
         private static readonly ErrorPageViewModel _errorPage = new ErrorPageViewModel();
             
@@ -23,7 +22,7 @@ namespace Expending_Card.Controllers
         // GET
         public IActionResult Index()
         {
-            if (_cards.Count != 0) return View(_model);
+            if (_model.Cards.Count != 0) return View(_model);
             
             _model.DefaultList();
             return View(_model);
@@ -42,13 +41,18 @@ namespace Expending_Card.Controllers
             return View(showCard);
         }
 
+        public IActionResult EditCard()
+        {
+            return View(_model);
+        }
+
         [HttpPost]
         public IActionResult AddCard(string name)
         {
             if (string.IsNullOrEmpty(name)) return BadRequest("欄位不得為空");
             if (IsCardExist(name)) return BadRequest("卡片已存在");
             
-            _model.AddCard(_cards.Count + 1, name);
+            _model.AddCard(_model.Cards.Count + 1, name);
             return Ok("卡片新增成功");
         }
 
@@ -74,11 +78,6 @@ namespace Expending_Card.Controllers
             return Ok("卡片名稱修改成功");
         }
 
-
-        public IActionResult EditCard()
-        {
-            return View(_model);
-        }
 
         public IActionResult CardEditError()
         {
