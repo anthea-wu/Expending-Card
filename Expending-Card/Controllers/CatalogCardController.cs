@@ -77,7 +77,7 @@ namespace Expending_Card.Controllers
 
         public IActionResult EditCard()
         {
-            return View(_cards);
+            return View(_model);
         }
 
         public IActionResult CardEditError()

@@ -1,4 +1,4 @@
-﻿@model List<Expending_Card.Models.CardsViewModel>
+﻿@model Expending_Card.Models.CardViewModel
 
 @{
     ViewBag.Title = "title";
@@ -16,12 +16,12 @@
     </tr>
   </thead>
   <tbody>
-    @foreach (var item in @Model)
+    @foreach (var item in @Model.Cards)
     {
         <tr>
-            <th scope="row">@item.CatalogOrder</th>
-            <td>@item.CatalogName</td>
-            <td colspan="2">@item.CatalogName</td>
+            <th scope="row">@item.Order</th>
+            <td>@item.Name</td>
+            <td colspan="2">@item.Name</td>
         </tr>
     }
   </tbody>
@@ -77,9 +77,9 @@
 
     <script>    
     let cards = [];
-    @foreach (var item in Model)
+    @foreach (var item in Model.Cards)
     {
-        @:cards.push('@item.CatalogName');
+        @:cards.push('@item.Name');
     }
     
     function createCard() {
@@ -98,6 +98,7 @@
         let data = new FormData(document.forms.namedItem(form));
         axios.post(url, data)
         .then(function (response) {
+            console.log(response.data);
             alert(response.data);
         })
         .catch(function (error) {

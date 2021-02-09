@@ -1,4 +1,6 @@
-﻿namespace Expending_Card.Models
+﻿using System.Collections.Generic;
+
+namespace Expending_Card.Models
 {
     public class CatalogCards
     {
