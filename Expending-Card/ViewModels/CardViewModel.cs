@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,21 +17,27 @@ namespace Expending_Card.Models
 
         public void DefaultList()
         {
+            Cards = new List<Card>();
             var card = new Card() {Order = 1, Name = "未分類"};
             Cards.Add(card);
         }
 
-        public void AddList(int order, string name)
+        public void AddCard(int order, string name)
         {
             var card = new Card() {Order = order, Name = name};
             Cards.Add(card);
         }
-        
-        public void UpdateList(string oldName, string newName)
+
+        public void DeleteCard(string name)
+        {
+            var card = Cards.Single(x => x.Name == name);
+            Cards.Remove(card);
+        }
+
+        public void UpdateCardName(string oldName, string newName)
         {
             var updateCard = Cards.Single(x => x.Name == oldName);
             updateCard.Name = newName;
         }
-        
     }
 }

@@ -12,23 +12,21 @@ namespace Expending_Card.Controllers
     {
         private readonly ILogger<CatalogCardController> _logger;
         private static readonly List<CardsViewModel> _cards = new List<CardsViewModel>();
-        private readonly CardViewModel _cardList = new CardViewModel();
+        private static readonly CardViewModel _model = new CardViewModel();
         private static readonly ErrorPageViewModel _errorPage = new ErrorPageViewModel();
             
         public CatalogCardController (ILogger<CatalogCardController> logger)
         {
             _logger = logger;
         }
-
+        
         // GET
         public IActionResult Index()
         {
-            if (_cards.Count == 0)
-            {
-                CreateCards("未分類");
-            }
+            if (_cards.Count != 0) return View(_model);
             
-            return View(_cards);
+            _model.DefaultList();
+            return View(_model);
         }
 
         [Route("{Controller}/{name}")]
@@ -39,7 +37,8 @@ namespace Expending_Card.Controllers
                 SetErrorDetails("顯示", "卡片不存在，請利用新增功能增加該卡片");
                 return RedirectToAction("CardEditError");
             }
-            var showCard = _cards.Single(x => x.CatalogName == name);
+            var showCard = _model.Cards.Single(x => x.Name == name);
+            
             return View(showCard);
         }
 
@@ -49,7 +48,7 @@ namespace Expending_Card.Controllers
             if (string.IsNullOrEmpty(name)) return BadRequest("欄位不得為空");
             if (IsCardExist(name)) return BadRequest("卡片已存在");
             
-            CreateCards(name);
+            _model.AddCard(_cards.Count + 1, name);
             return Ok("卡片新增成功");
         }
 
@@ -59,8 +58,7 @@ namespace Expending_Card.Controllers
             if (string.IsNullOrEmpty(name)) return BadRequest("欄位不得為空");
             if (!IsCardExist(name)) return BadRequest("卡片不存在");
             
-            var deleteCard = _cards.Single(x => x.CatalogName == name);
-            _cards.Remove(deleteCard);
+            _model.DeleteCard(name);
             return Ok("卡片刪除成功");
 
         }
@@ -72,8 +70,7 @@ namespace Expending_Card.Controllers
             if (!IsCardExist(oldName)) return BadRequest("要修改的卡片不存在");
             if (IsCardExist(newName)) return BadRequest("修改後的卡片名稱已存在");
             
-            var update = _cards.Single(x => x.CatalogName == oldName);
-            update.CatalogName = newName;
+            _model.UpdateCardName(oldName, newName);
             return Ok("卡片名稱修改成功");
         }
 
@@ -88,15 +85,9 @@ namespace Expending_Card.Controllers
             return View(_errorPage);
         }
 
-        private void CreateCards(string cardName)
-        {
-            var cardOrder = _cards.Count + 1;
-            _cards.Add(new CardsViewModel() {CatalogName = cardName, CatalogOrder = cardOrder});
-        }
-
         private static bool IsCardExist(string name)
         {
-            return _cards.Any(x => x.CatalogName == name);
+            return _model.Cards.Any(x => x.Name == name);
         }
 
         private void SetErrorDetails(string name, string details)
