@@ -17,6 +17,7 @@ namespace Expending_Card.Models
 
         public void DefaultList()
         {
+            Cards = new List<Card>();
             var card = new Card() {Order = 1, Name = "未分類"};
             Cards.Add(card);
         }
