@@ -22,23 +22,20 @@ namespace Expending_Card.Controllers
         // GET
         public IActionResult Index()
         {
+            _model.Cards = new List<Card>();
             if (_model.Cards.Count != 0) return View(_model);
             
             _model.DefaultList();
             return View(_model);
         }
 
-        [Route("{Controller}/{name}")]
-        public IActionResult ShowOneCard(string name)
+        public IActionResult Card(string name)
         {
-            if (!IsCardExist(name))
-            {
-                SetErrorDetails("顯示", "卡片不存在，請利用新增功能增加該卡片");
-                return RedirectToAction("CardEditError");
-            }
-            var showCard = _model.Cards.Single(x => x.Name == name);
+            if (!IsCardExist(name)) return BadRequest("卡片不存在，請利用新增功能增加該卡片");
             
+            var showCard = _model.Cards.Single(x => x.Name == name);
             return View(showCard);
+
         }
 
         public IActionResult EditCard()
@@ -51,8 +48,9 @@ namespace Expending_Card.Controllers
         {
             if (string.IsNullOrEmpty(name)) return BadRequest("欄位不得為空");
             if (IsCardExist(name)) return BadRequest("卡片已存在");
-            
-            _model.AddCard(_model.Cards.Count + 1, name);
+
+            var order = _model.Cards.Count + 1;
+            _model.AddCard(order, name);
             return Ok("卡片新增成功");
         }
 
