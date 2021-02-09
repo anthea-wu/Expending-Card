@@ -4,20 +4,33 @@ using System.Linq;
 
 namespace Expending_Card.Models
 {
+    public class Card
+    {
+        public int Order { get; set; }
+        public string Name { get; set; }
+    }
+
     public class CardViewModel
     {
-        public string CatalogName { get; set; }
-        public int CatalogOrder { get; set; }
-        public List<CardViewModel> Cards { get; set; }
-    
-        public void CreateList()
+        public List<Card> Cards { get; set; }
+
+        public void DefaultList()
         {
-            Cards = new List<CardViewModel>();
+            var card = new Card() {Order = 1, Name = "未分類"};
+            Cards.Add(card);
         }
 
-        public void AddCardToList(string name, int order)
+        public void AddList(int order, string name)
         {
-            Cards.Append(new CardViewModel {CatalogName = name, CatalogOrder = order});
+            var card = new Card() {Order = order, Name = name};
+            Cards.Add(card);
         }
+        
+        public void UpdateList(string oldName, string newName)
+        {
+            var updateCard = Cards.Single(x => x.Name == oldName);
+            updateCard.Name = newName;
+        }
+        
     }
 }
