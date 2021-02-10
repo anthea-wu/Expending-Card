@@ -83,6 +83,7 @@
     }
     
     function createCard() {
+        console.log("建立卡片")
         editInfo('https://localhost:5001/CatalogCard/AddCard', "create-info")
     }
 
@@ -96,6 +97,7 @@
     
     function editInfo(url, form) {
         let data = new FormData(document.forms.namedItem(form));
+        console.log("傳送資料")
         axios.post(url, data)
         .then(function (response) {
             console.log(response.data);
