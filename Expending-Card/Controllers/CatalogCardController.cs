@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Expending_Card.Models;
-using Expending_Card.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -12,8 +11,6 @@ namespace Expending_Card.Controllers
     {
         private readonly ILogger<CatalogCardController> _logger;
         private static readonly CardViewModel _model = new CardViewModel();
-        private static readonly ErrorPageViewModel _errorPage = new ErrorPageViewModel();
-        int count = 0;
             
         public CatalogCardController (ILogger<CatalogCardController> logger)
         {
@@ -47,8 +44,6 @@ namespace Expending_Card.Controllers
         [HttpPost]
         public IActionResult AddCard(string name)
         {
-            count += 1;
-            _logger.LogInformation($"第{count}次");
             if (string.IsNullOrEmpty(name)) return BadRequest("欄位不得為空");
             if (IsCardExist(name)) return BadRequest("卡片已存在");
             
@@ -76,12 +71,6 @@ namespace Expending_Card.Controllers
             
             _model.UpdateCardName(oldName, newName);
             return Ok("卡片名稱修改成功");
-        }
-
-
-        public IActionResult CardEditError()
-        {
-            return View(_errorPage);
         }
 
         private static bool IsCardExist(string name)
