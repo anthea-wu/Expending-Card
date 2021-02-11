@@ -17,7 +17,7 @@ namespace Expending_Card.Controllers
             _logger = logger;
         }
 
-        private void InitializeModels()
+        private static void InitializeModels()
         {
             _expending.CardViewModel = _card;
             _expending.DetailViewModel = _detail;
@@ -25,13 +25,18 @@ namespace Expending_Card.Controllers
             _detail.Details = new List<DetailList>();
         }
 
-        public ActionResult Details()
+        public IActionResult Details()
         {
             InitializeModels();
             if (_card.Cards.Count != 0 && _detail.Details.Count != 0) return View(_expending);
             
             _card.DefaultList();
             _detail.DefaultList();
+            return View(_expending);
+        }
+
+        public IActionResult EditDetails()
+        {
             return View(_expending);
         }
     }
