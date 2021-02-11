@@ -10,23 +10,28 @@
 </div>
 
 <div class="row mt-4">
-    <table class="table col-9">
+    <table class="table col-12">
       <thead class="thead-light">
         <tr>
           <th scope="col">Date</th>
           <th scope="col" colspan="2">Details</th>
           <th scope="col">Price</th>
           <th scope="col">Card</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         @foreach (var item in @Model.DetailViewModel.Details)
         {
             <tr>
-                <th scope="row">@item.Date</th>
-                <td colspan="2">@item.Detail</td>
-                <td>@item.Price</td>
-                <td>@item.Card.Name</td>
+                <th scope="row" class="align-middle">@item.Date</th>
+                <td colspan="2" class="align-middle">@item.Detail</td>
+                <td class="align-middle">@item.Price</td>
+                <td class="align-middle">@item.Card.Name</td>
+                <td>
+                    <button type="button" class="btn btn-light" onclick="">Delete</button>
+                    <button type="button" class="btn btn-light" onclick="">Update</button>
+                </td>
             </tr>
         }
       </tbody>
