@@ -1,0 +1,34 @@
+﻿@model Expending_Card.Models.ExpendingViewModel
+
+@{
+    ViewBag.Title = "編輯記帳明細";
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <h2>全部記帳明細</h2>
+</div>
+
+<div class="row mt-4">
+    <table class="table col-9">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col" colspan="2">Details</th>
+          <th scope="col">Price</th>
+          <th scope="col">Card</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach (var item in @Model.DetailViewModel.Details)
+        {
+            <tr>
+                <th scope="row">@item.Date</th>
+                <td colspan="2">@item.Detail</td>
+                <td>@item.Price</td>
+                <td>@item.Card.Name</td>
+            </tr>
+        }
+      </tbody>
+    </table>
+</div>

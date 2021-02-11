@@ -5,14 +5,14 @@ using Microsoft.Extensions.Logging;
 
 namespace Expending_Card.Controllers
 {
-    public class DetailEditController : Controller
+    public class DetailsController : Controller
     {
-        private ILogger<DetailEditController> _logger;
+        private ILogger<DetailsController> _logger;
         private static readonly DetailViewModel _detail = new DetailViewModel();
         private static readonly CardViewModel _card = new CardViewModel();
         private static readonly ExpendingViewModel _expending = new ExpendingViewModel();
         
-        public DetailEditController(ILogger<DetailEditController> logger)
+        public DetailsController(ILogger<DetailsController> logger)
         {
             _logger = logger;
         }
@@ -25,7 +25,7 @@ namespace Expending_Card.Controllers
             _detail.Details = new List<DetailList>();
         }
 
-        public IActionResult Details()
+        public IActionResult Index()
         {
             InitializeModels();
             if (_card.Cards.Count != 0 && _detail.Details.Count != 0) return View(_expending);
@@ -35,7 +35,7 @@ namespace Expending_Card.Controllers
             return View(_expending);
         }
 
-        public IActionResult EditDetails()
+        public IActionResult EditDetail()
         {
             return View(_expending);
         }
