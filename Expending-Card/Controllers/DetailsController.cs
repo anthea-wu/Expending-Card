@@ -37,6 +37,7 @@ namespace Expending_Card.Controllers
 
         public IActionResult EditDetail()
         {
+            _detail.AddList();
             return View(_expending);
         }
     }

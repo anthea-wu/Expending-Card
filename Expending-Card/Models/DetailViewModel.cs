@@ -23,5 +23,11 @@ namespace Expending_Card.Models
             var detail = new DetailList() {Order = 1, Detail = "冰淇淋奶茶", Card = card, Date = "2021/02/11", Price = 120};
             Details.Add(detail);
         }
+        public void AddList()
+        {
+            var card = new Card() {Name = "食物", Order = 3};
+            var detail = new DetailList() {Order = 2, Detail = "泡芙", Card = card, Date = "2021/02/11", Price = 120};
+            Details.Add(detail);
+        }
     }
 }
