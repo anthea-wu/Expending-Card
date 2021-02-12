@@ -26,6 +26,10 @@ namespace Expending_Card.Models
             var card = new Card() {Order = order, Name = name};
             Cards.Add(card);
         }
+        public void AddCard(Card card)
+        {
+            Cards.Add(card);
+        }
 
         public void DeleteCard(string name)
         {
