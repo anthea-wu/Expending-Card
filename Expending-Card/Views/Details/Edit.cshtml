@@ -46,12 +46,8 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script>    
-    function postEdit(url,obj){
-        let order = $(obj).closest("tr").find(".detail-order").text();
-        let params = new URLSearchParams();;
-        params.append("order",order)
-        console.log(typeof order)
-        axios.post(url, params)
+    function postEdit(url,data){
+        axios.post(url, data)
         .then(function (res){
             alert(res.data)
             window.location.href  = "https://localhost:5001/Details/Edit"
@@ -63,8 +59,9 @@
     
     function deleteDetail(obj) {
         let order = $(obj).closest("tr").find(".detail-order").text();
-        console.log(order)
-        postEdit("https://localhost:5001/Details/Delete", obj)
+        let data = new URLSearchParams();;
+        data.append("order",order)
+        postEdit("https://localhost:5001/Details/Delete", data)
     }
     
     
