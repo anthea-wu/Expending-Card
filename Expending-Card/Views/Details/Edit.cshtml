@@ -36,7 +36,26 @@
                 </td>
             </tr>
         }
-      </tbody>
+        
+        <tr>
+            <td id="order" class="align-middle text-center">@ViewBag.DetailNextOrder</td>
+            <td class="align-middle">
+                <input type="text" class="form-control col-lg-10" name="date" placeholder="時間">
+            </td>
+            <td colspan="2" class="align-middle">
+                <input type="text" class="form-control col-lg-10" name="detail" placeholder="明細">
+            </td>
+            <td class="align-middle">
+                <input type="text" class="form-control col-lg-10" name="price" placeholder="價格">
+            </td>
+            <td class="align-middle">
+                <input type="text" class="form-control col-lg-10" name="card" placeholder="卡片">
+            </td>
+            <td class="align-middle">
+                <button type="button" class="btn btn-light" onclick="createDetail(this);">Create</button>
+            </td>
+        </tr>
+        </tbody>
     </table>
 </div>
 
@@ -55,6 +74,28 @@
         .catch(function (error){
             alert(error.response.data)
         })
+    }
+    
+    function createDetail(obj) {
+        let order = $(obj).closest("tr").find("#order").text();
+        let date = $(obj).closest("tr").find("input[name='date']").val();
+        console.log(date)
+        let detail = $(obj).closest("tr").find("input[name='detail']").val();
+        console.log(detail)
+        let price = $(obj).closest("tr").find("input[name='price']").val();
+        console.log(price)
+        let card = $(obj).closest("tr").find("input[name='card']").val();
+        console.log(card)
+        
+        let info = [order, date, detail, price, card]
+        let data = new URLSearchParams();
+        data.append("order", order);
+        data.append("date", date);
+        data.append("detail", detail);
+        data.append("price", price);
+        data.append("card", card);
+        
+        postEdit("https://localhost:5001/Details/Add", data)
     }
     
     function deleteDetail(obj) {
