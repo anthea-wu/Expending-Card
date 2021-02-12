@@ -37,7 +37,9 @@
         }
         
         <tr>
-            <td id="order" class="align-middle text-center">@ViewBag.DetailNextOrder</td>
+            <td id="order" class="align-middle text-center">
+                <input disabled type="text" class="form-control col-lg-10" name="order" placeholder="時間" value="@ViewBag.DetailNextOrder">
+            </td>
             <td class="align-middle">
                 <input type="text" class="form-control col-lg-10" name="date" placeholder="時間">
             </td>
@@ -77,23 +79,14 @@
     }
     
     function createDetail(obj) {
-        let order = $(obj).closest("tr").find("#order").text();
-        let date = $(obj).closest("tr").find("input[name='date']").val();
-        console.log(date)
-        let detail = $(obj).closest("tr").find("input[name='detail']").val();
-        console.log(detail)
-        let price = $(obj).closest("tr").find("input[name='price']").val();
-        console.log(price)
-        let card = $(obj).closest("tr").find("input[name='card']").val();
-        console.log(card)
-        
-        let info = [order, date, detail, price, card]
+        let tr = $(obj).closest("tr");
         let data = new URLSearchParams();
-        data.append("order", order);
-        data.append("date", date);
-        data.append("detail", detail);
-        data.append("price", price);
-        data.append("card", card);
+        
+        data.append("order", getData(tr, 'order'));
+        data.append("date", getData(tr, 'date'));
+        data.append("detail", getData(tr, 'detail'));
+        data.append("price", getData(tr, 'price'));
+        data.append("card", getData(tr, 'card'));
         
         postEdit("https://localhost:5001/Details/Add", data)
     }
@@ -101,9 +94,13 @@
     function deleteDetail(obj) {
         let order = $(obj).closest("tr").find(".detail-order").text();
         let data = new URLSearchParams();
+        
         data.append("order",order)
         postEdit("https://localhost:5001/Details/Delete", data)
     }
     
+    function getData(html, name) {
+        return html.find(`input[name='${name}']`).val()
+    }
     </script>
 }
