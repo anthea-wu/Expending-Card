@@ -35,10 +35,20 @@ namespace Expending_Card.Controllers
             return View(_expending);
         }
 
-        public IActionResult EditDetail()
+        public IActionResult Edit()
         {
-            _detail.AddList();
+            var card = new Card() {Name = "食物", Order = 3};
+            var detail = new DetailList() {Order = 2, Detail = "泡芙", Card = card, Date = "2021/02/11", Price = 120};
+            
+            if (!IsItemExist("C", card.Name)) _card.AddCard(card);
+            _detail.AddList(detail);
             return View(_expending);
+        }
+
+        private bool IsItemExist(string obj, string name)
+        {
+            return obj == "C" ? _card.Cards.Exists(x => x.Name == name)
+                : _detail.Details.Exists(x => x.Detail == name);
         }
     }
 }
