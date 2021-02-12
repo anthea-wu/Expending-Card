@@ -25,7 +25,7 @@
         @foreach (var item in @Model.DetailViewModel.Details)
         {
             <tr>
-                <td scope="row" class="align-middle detail-order">@item.Order</td>
+                <td scope="row" name="order" class="align-middle detail-order">@item.Order</td>
                 <td scope="row" class="align-middle">@item.Date</td>
                 <td colspan="2" class="align-middle">@item.Detail</td>
                 <td class="align-middle">@item.Price</td>
@@ -44,17 +44,27 @@
 {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    
-    <script>
-    let details = [];
-    @foreach (var item in Model.DetailViewModel.Details)
-    {
-        @:details.push('@item.Order');
+
+    <script>    
+    function postEdit(url,obj){
+        let order = $(obj).closest("tr").find(".detail-order").text();
+        let params = new URLSearchParams();;
+        params.append("order",order)
+        console.log(typeof order)
+        axios.post(url, params)
+        .then(function (res){
+            alert(res.data)
+            window.location.href  = "https://localhost:5001/Details/Edit"
+        })
+        .catch(function (error){
+            alert(error.response.data)
+        })
     }
     
     function deleteDetail(obj) {
         let order = $(obj).closest("tr").find(".detail-order").text();
         console.log(order)
+        postEdit("https://localhost:5001/Details/Delete", obj)
     }
     
     

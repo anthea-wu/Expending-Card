@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Expending_Card.Models;
 using Microsoft.Extensions.Logging;
@@ -35,20 +36,24 @@ namespace Expending_Card.Controllers
             return View(_expending);
         }
 
+
+        private bool IsItemExist(string obj, string condition)
+        {
+            return obj == "C" ? _card.Cards.Exists(x => x.Name == condition)
+                : _detail.Details.Exists(x => x.Order.ToString() == condition);
+        }
+
         public IActionResult Edit()
         {
-            var card = new Card() {Name = "食物", Order = 3};
-            var detail = new DetailList() {Order = 2, Detail = "泡芙", Card = card, Date = "2021/02/11", Price = 120};
-            
-            if (!IsItemExist("C", card.Name)) _card.AddCard(card);
-            _detail.AddList(detail);
             return View(_expending);
         }
 
-        private bool IsItemExist(string obj, string name)
+        [HttpPost]
+        public IActionResult Delete(string order)
         {
-            return obj == "C" ? _card.Cards.Exists(x => x.Name == name)
-                : _detail.Details.Exists(x => x.Detail == name);
+            if (string.IsNullOrEmpty(order) || !IsItemExist("D", order)) return BadRequest("這個明細不存在");
+            _detail.DeleteList(Convert.ToInt32(order));
+            return Ok("明細刪除成功");
         }
     }
 }

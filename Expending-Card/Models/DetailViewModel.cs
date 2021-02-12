@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Expending_Card.Models
 {
@@ -26,6 +27,12 @@ namespace Expending_Card.Models
         public void AddList(DetailList detail)
         {
             Details.Add(detail);
+        }
+
+        public void DeleteList(int order)
+        {
+            var detail = Details.Single(x => x.Order == order);
+            Details.Remove(detail);
         }
     }
 }

@@ -1,7 +1,9 @@
 {
   "name": "Expending-Card",
   "version": "1.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "utf8": "^3.0.0"
+  },
   "devDependencies": {
     "axios": "^0.21.1"
   }
