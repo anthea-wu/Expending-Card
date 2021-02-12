@@ -22,8 +22,6 @@ namespace Expending_Card.Controllers
         {
             _expending.CardViewModel = _card;
             _expending.DetailViewModel = _detail;
-            _card.Cards = new List<Card>();
-            _detail.Details = new List<DetailList>();
         }
 
         public IActionResult Index()
@@ -31,6 +29,7 @@ namespace Expending_Card.Controllers
             InitializeModels();
             if (_card.Cards.Count != 0 && _detail.Details.Count != 0) return View(_expending);
             
+            InitializeModels();
             _card.DefaultList();
             _detail.DefaultList();
             return View(_expending);
@@ -45,6 +44,9 @@ namespace Expending_Card.Controllers
 
         public IActionResult Edit()
         {
+            InitializeModels();
+            
+            ViewBag.DetailNextOrder = _detail.Details.Count + 1;
             return View(_expending);
         }
 
