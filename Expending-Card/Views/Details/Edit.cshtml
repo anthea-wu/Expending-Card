@@ -10,29 +10,28 @@
 </div>
 
 <div class="row mt-4">
-    <table class="table col-12">
-      <thead class="thead-light">
+    <table class="table">
+        <thead class="thead-light">
         <tr>
-          <th scope="col">Order</th>
-          <th scope="col">Date</th>
-          <th scope="col" colspan="2">Details</th>
-          <th scope="col">Price</th>
-          <th scope="col">Card</th>
-          <th scope="col"></th>
+            <th scope="col">Order</th>
+            <th scope="col">Date</th>
+            <th scope="col" colspan="2">Details</th>
+            <th scope="col">Price</th>
+            <th scope="col">Card</th>
+            <th scope="col"></th>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
         @foreach (var item in @Model.DetailViewModel.Details)
         {
             <tr>
-                <td scope="row" name="order" class="align-middle detail-order">@item.Order</td>
-                <td scope="row" class="align-middle">@item.Date</td>
+                <td name="order" class="align-middle detail-order text-center">@item.Order</td>
+                <td class="align-middle">@item.Date</td>
                 <td colspan="2" class="align-middle">@item.Detail</td>
                 <td class="align-middle">@item.Price</td>
                 <td class="align-middle">@item.Card.Name</td>
                 <td>
                     <button type="button" class="btn btn-light" onclick="deleteDetail(this);">Delete</button>
-                    <button type="button" class="btn btn-light" onclick="">Update</button>
                 </td>
             </tr>
         }
@@ -64,7 +63,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <script>    
+    <script>
+    
     function postEdit(url,data){
         axios.post(url, data)
         .then(function (res){
@@ -100,11 +100,10 @@
     
     function deleteDetail(obj) {
         let order = $(obj).closest("tr").find(".detail-order").text();
-        let data = new URLSearchParams();;
+        let data = new URLSearchParams();
         data.append("order",order)
         postEdit("https://localhost:5001/Details/Delete", data)
     }
-    
     
     </script>
 }
