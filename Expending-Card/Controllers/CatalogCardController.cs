@@ -10,28 +10,25 @@ namespace Expending_Card.Controllers
 { public class CatalogCardController : Controller
     {
         private readonly ILogger<CatalogCardController> _logger;
-        private static readonly CardViewModel _card = new CardViewModel();
-        private static readonly DetailViewModel _detail = new DetailViewModel();
+        public static CardViewModel _card = new CardViewModel();
+        public static DetailViewModel _detail = new DetailViewModel();
         private static readonly ExpendingViewModel _expending = new ExpendingViewModel();
             
         public CatalogCardController (ILogger<CatalogCardController> logger)
         {
             _logger = logger;
         }
-        
-        // GET
-
-        private static void InitializeModels()
-        {
-            _expending.CardViewModel = _card;
-            _expending.DetailViewModel = _detail;
-        }
 
         public IActionResult Index()
         {
-            InitializeModels();
-            if (_card.Cards.Count != 0) return View(_card);
+            if (_card.Cards.Count != 0)
+            {
+                GetCurrentModels();
+                return View(_card);
+            }
             
+            InitializeModels();
+            GetCurrentModels();
             _card.DefaultList();
             return View(_card);
         }
@@ -40,8 +37,11 @@ namespace Expending_Card.Controllers
         {
             if (!IsCardExist(name)) return BadRequest("卡片不存在，請利用新增功能增加該卡片");
             
-            var showCard = _card.Cards.Single(x => x.Name == name);
-            return View(showCard);
+            InitializeModels();
+            GetCurrentModels();
+            _logger.LogInformation($"第一筆資料是{_expending.DetailViewModel.Details[0].Detail}");
+            ViewBag.ShowCard = _card.Cards.Single(x => x.Name == name);
+            return View(_expending);
 
         }
 
@@ -80,6 +80,18 @@ namespace Expending_Card.Controllers
             
             _card.UpdateCardName(oldName, newName);
             return Ok("卡片名稱修改成功");
+        }
+
+        private static void InitializeModels()
+        {
+            _expending.CardViewModel = _card;
+            _expending.DetailViewModel = _detail;
+        }
+
+        private void GetCurrentModels()
+        {
+            _detail = DetailsController._detail;
+            _card = DetailsController._card;
         }
 
         private static bool IsCardExist(string name)

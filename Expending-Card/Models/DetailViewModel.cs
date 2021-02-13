@@ -22,11 +22,10 @@ namespace Expending_Card.Models
             Details = new List<DetailData>();
         }
         
-        public void DefaultList()
+        public void DefaultList(Card card)
         {
             Details = new List<DetailData>();
-            var card = new Card() {Name = "飲料", Order = 2};
-            var detail = new DetailData() {Order = 1, Detail = "冰淇淋奶茶", Card = card, Date = "2021/02/11", Price = 120};
+            var detail = new DetailData() {Order = 1, Detail = "Order自動產生", Card = card, Date = DateTime.Now.ToString(), Price = 100};
             Details.Add(detail);
         }
         public void AddList(DetailData detail)

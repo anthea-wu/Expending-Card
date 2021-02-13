@@ -10,8 +10,8 @@ namespace Expending_Card.Controllers
     public class DetailsController : Controller
     {
         private ILogger<DetailsController> _logger;
-        private static readonly DetailViewModel _detail = new DetailViewModel();
-        private static readonly CardViewModel _card = new CardViewModel();
+        public static DetailViewModel _detail = new DetailViewModel();
+        public static CardViewModel _card = new CardViewModel();
         private static readonly ExpendingViewModel _expending = new ExpendingViewModel();
         
         public DetailsController(ILogger<DetailsController> logger)
@@ -27,20 +27,25 @@ namespace Expending_Card.Controllers
 
         public IActionResult Index()
         {
-            if (_card.Cards.Count != 0 && _detail.Details.Count != 0) return View(_expending);
+            if (_detail.Details.Count != 0 && _card.Cards.Count != 0)
+            {
+                GetCurrentModels();
+                return View(_expending);
+            }
             
             InitializeModels();
-            _card.DefaultList();
-            _detail.DefaultList();
+            GetCurrentModels();
+            
+            if (_card.Cards.Count == 0) _card.DefaultList();
             return View(_expending);
         }
 
-
-        private bool IsItemExist(string obj, string condition)
+        private void GetCurrentModels()
         {
-            return obj == "C" ? _card.Cards.Exists(x => x.Name == condition)
-                : _detail.Details.Exists(x => x.Order.ToString() == condition);
+            _detail = CatalogCardController._detail;
+            _card = CatalogCardController._card;
         }
+
 
         public IActionResult Edit()
         {
@@ -95,7 +100,8 @@ namespace Expending_Card.Controllers
             if (string.IsNullOrEmpty(detail)) detail = old.Detail;
             if (string.IsNullOrEmpty(date)) date = old.Date;
             if (string.IsNullOrEmpty(price.ToString())) price = old.Price;
-            
+
+            //_card = DetailsController._card;
             if (!IsItemExist("C", card)) _card.AddCard(_card.Cards.Count+1, card);
             var cardData = _card.Cards.Single(x => x.Name == card);
 
@@ -106,6 +112,12 @@ namespace Expending_Card.Controllers
             _detail.UpdateList(data);
 
             return Ok("明細更新成功");
+        }
+
+        private bool IsItemExist(string obj, string condition)
+        {
+            return obj == "C" ? _card.Cards.Exists(x => x.Name == condition)
+                : _detail.Details.Exists(x => x.Order.ToString() == condition);
         }
     }
 }

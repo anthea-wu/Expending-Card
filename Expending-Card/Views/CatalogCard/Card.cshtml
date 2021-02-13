@@ -1,15 +1,46 @@
-﻿@model Expending_Card.Models.Card
+﻿@model Expending_Card.Models.ExpendingViewModel
 
 @{
-    ViewData["Title"] = @Model.Name;
+    ViewData["Title"] = ViewBag.ShowCard.Name;
     Layout = "_Layout";
 }
 
-<h2>@Model.Name</h2>
-<p>卡片序號: @Model.Order</p>
+<h2>@ViewBag.ShowCard.Name</h2>
+<p>卡片序號: @ViewBag.ShowCard.Order</p>
 
-
-<div class="col-md-2">
+<div class="row mt-4">
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Order</th>
+            <th scope="col">Date</th>
+            <th scope="col" colspan="2">Details</th>
+            <th scope="col">Price</th>
+            <th scope="col">Card</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in @Model.DetailViewModel.Details)
+        {
+            if (item.Card.Name == ViewBag.ShowCard.Name)
+            {
+                <tr>
+                    <td name="order" class="align-middle detail-order text-center">@item.Order</td>
+                    <td class="align-middle">@item.Date</td>
+                    <td colspan="2" class="align-middle">@item.Detail</td>
+                    <td class="align-middle">@item.Price</td>
+                    <td class="align-middle">@item.Card.Name</td>
+                    <td>
+                        <button type="button" class="btn btn-light" onclick="">Delete</button>
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</div>
+        <div class="col-md-2">
     <form asp-controller="CatalogCard" asp-action="EditCard">
         <div class="form-group">
             <input type="submit" value="Update" class="btn btn-default" />
