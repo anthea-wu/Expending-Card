@@ -61,7 +61,12 @@ namespace Expending_Card.Controllers
         [HttpPost]
         public IActionResult Add(string order, string date, string detail, int price, string card)
         {
-            if (string.IsNullOrEmpty(order)) return BadRequest("欄位不得為空");
+            if (string.IsNullOrEmpty(order)) return BadRequest("錯誤：Order為空");
+            
+            if (string.IsNullOrEmpty(date) || string.IsNullOrEmpty(detail) ||
+                price==0 || string.IsNullOrEmpty(card)) return BadRequest("建立明細時不能有任何空白欄位");
+            
+            if (price <= 0) return BadRequest("價格不得小於等於0元");
 
             if (!IsItemExist("C", card))
             {
