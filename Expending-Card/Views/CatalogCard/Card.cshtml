@@ -17,7 +17,6 @@
             <th scope="col" colspan="2">Details</th>
             <th scope="col">Price</th>
             <th scope="col">Card</th>
-            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -31,19 +30,27 @@
                     <td colspan="2" class="align-middle">@item.Detail</td>
                     <td class="align-middle">@item.Price</td>
                     <td class="align-middle">@item.Card.Name</td>
-                    <td>
-                        <button type="button" class="btn btn-light" onclick="">Delete</button>
-                    </td>
                 </tr>
             }
         }
         </tbody>
     </table>
 </div>
-        <div class="col-md-2">
-    <form asp-controller="CatalogCard" asp-action="EditCard">
-        <div class="form-group">
-            <input type="submit" value="Update" class="btn btn-default" />
-        </div>
-    </form>
+
+<div class="row">
+    <div class="col-md-2">
+        <form asp-controller="CatalogCard" asp-action="EditCard">
+            <div class="form-group">
+                <input type="submit" value="Card Update" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-2">
+        <form asp-controller="Details" asp-action="Edit">
+            <div class="form-group">
+                <input type="submit" value="Detail Update" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
 </div>

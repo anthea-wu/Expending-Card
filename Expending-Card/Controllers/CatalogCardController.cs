@@ -39,7 +39,6 @@ namespace Expending_Card.Controllers
             
             InitializeModels();
             GetCurrentModels();
-            _logger.LogInformation($"第一筆資料是{_expending.DetailViewModel.Details[0].Detail}");
             ViewBag.ShowCard = _card.Cards.Single(x => x.Name == name);
             return View(_expending);
 
