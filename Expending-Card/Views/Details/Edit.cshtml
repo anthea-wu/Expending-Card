@@ -37,8 +37,8 @@
         }
         
         <tr>
-            <td id="order" class="align-middle text-center">
-                <input disabled type="text" class="form-control col-lg-10" name="order" placeholder="時間" value="@ViewBag.DetailNextOrder">
+            <td id="order" class="align-middle justify-content-center">
+                <input disabled type="text" class="form-control col-lg-10" name="order" value="@ViewBag.DetailNextOrder">
             </td>
             <td class="align-middle">
                 <input type="text" class="form-control col-lg-10" name="date" placeholder="時間">
@@ -56,6 +56,34 @@
                 <button type="button" class="btn btn-light" onclick="createDetail(this);">Create</button>
             </td>
         </tr>
+        
+        <tr>
+            <td id="order" class="align-middle text-center">
+                <select class="form-control col-lg-10" name="order" id="update-order">
+                    @{
+                        foreach (var item in Model.DetailViewModel.Details)
+                        {
+                            <option value="@item.Order">@item.Order</option>
+                        }
+                    }
+                </select>
+            </td>
+            <td class="align-middle">
+                <input type="text" class="form-control col-lg-10" name="date" placeholder="時間">
+            </td>
+            <td colspan="2" class="align-middle">
+                <input type="text" class="form-control col-lg-10" name="detail" placeholder="明細">
+            </td>
+            <td class="align-middle">
+                <input type="text" class="form-control col-lg-10" name="price" placeholder="價格">
+            </td>
+            <td class="align-middle">
+                <input type="text" class="form-control col-lg-10" name="card" placeholder="卡片">
+            </td>
+            <td class="align-middle">
+                <button type="button" class="btn btn-light" onclick="updateDetail(this);">Update</button>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>
@@ -66,7 +94,6 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script>
-    
     function postEdit(url,data){
         axios.post(url, data)
         .then(function (res){
@@ -76,6 +103,21 @@
         .catch(function (error){
             alert(error.response.data)
         })
+    }
+    
+    function updateDetail(obj) {
+        let tr = $(obj).closest("tr");
+        let data = new URLSearchParams();
+        
+        let order = $("#update-order").val();
+        
+        data.append("order", order);
+        data.append("date", getData(tr, 'date'));
+        data.append("detail", getData(tr, 'detail'));
+        data.append("price", getData(tr, 'price'));
+        data.append("card", getData(tr, 'card'));
+        
+        postEdit("https://localhost:5001/Details/Update", data)
     }
     
     function createDetail(obj) {

@@ -39,5 +39,14 @@ namespace Expending_Card.Models
             var detail = Details.Single(x => x.Order == order);
             Details.Remove(detail);
         }
+
+        public void UpdateList(DetailData data)
+        {
+            var old = Details.Single(x => x.Order == data.Order);
+            old.Card = data.Card;
+            old.Date = data.Date;
+            old.Detail = data.Detail;
+            old.Price = data.Price;
+        }
     }
 }

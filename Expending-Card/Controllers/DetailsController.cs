@@ -79,5 +79,32 @@ namespace Expending_Card.Controllers
             });
             return Ok("明細建立成功");
         }
+
+        [HttpPost]
+        public IActionResult Update(string order, string date, string detail, int price, string card)
+        {
+            if (string.IsNullOrEmpty(date) && string.IsNullOrEmpty(detail) &&
+                price==0 && string.IsNullOrEmpty(card)) return BadRequest("至少要填寫一欄");
+            
+            if (price <= 0) return BadRequest("價格不得小於等於0元");
+            
+            var old = _detail.Details.Single(x => x.Order.ToString() == order);
+            
+            if (string.IsNullOrEmpty(card)) card = old.Card.Name;
+            if (string.IsNullOrEmpty(detail)) detail = old.Detail;
+            if (string.IsNullOrEmpty(date)) date = old.Date;
+            if (string.IsNullOrEmpty(price.ToString())) price = old.Price;
+            
+            if (!IsItemExist("C", card)) _card.AddCard(_card.Cards.Count+1, card);
+            var cardData = _card.Cards.Single(x => x.Name == card);
+
+            var data = new DetailData()
+            {
+                Order = Convert.ToInt32(order), Card = cardData, Date = date, Detail = detail, Price = price
+            };
+            _detail.UpdateList(data);
+
+            return Ok("明細更新成功");
+        }
     }
 }
