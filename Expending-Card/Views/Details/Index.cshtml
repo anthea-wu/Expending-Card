@@ -1,0 +1,24 @@
+﻿@model Expending_Card.Models.ExpendingViewModel
+
+@{
+    ViewBag.Title = "記帳明細";
+    Layout = "_Layout";
+}
+
+<h2>記帳明細</h2>
+<ol class="mt-3">
+    @foreach (var detail in @Model.DetailViewModel.Details)
+    {
+        <li>@detail.Date: @detail.Detail - @detail.Price  (@detail.Card.Name)</li>
+    }
+</ol>
+
+<div class="row">
+    <div class="col-md-2">
+        <form asp-controller="Details" asp-action="Edit">
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>

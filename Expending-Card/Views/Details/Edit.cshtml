@@ -1,0 +1,148 @@
+﻿@model Expending_Card.Models.ExpendingViewModel
+
+@{
+    ViewBag.Title = "編輯記帳明細";
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <h2>全部記帳明細</h2>
+</div>
+
+<div class="row mt-4">
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Order</th>
+            <th scope="col">Date</th>
+            <th scope="col" colspan="2">Details</th>
+            <th scope="col">Price</th>
+            <th scope="col">Card</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in @Model.DetailViewModel.Details)
+        {
+            <tr>
+                <td name="order" class="align-middle detail-order text-center">@item.Order</td>
+                <td class="align-middle">@item.Date</td>
+                <td colspan="2" class="align-middle">@item.Detail</td>
+                <td class="align-middle">@item.Price</td>
+                <td class="align-middle">@item.Card.Name</td>
+                <td>
+                    <button type="button" class="btn btn-light" onclick="deleteDetail(this);">Delete</button>
+                </td>
+            </tr>
+        }
+        
+        <tr>
+            <td id="order" class="align-middle justify-content-center">
+                <input disabled type="text" class="form-control col-lg-10" name="order" value="@ViewBag.DetailNextOrder">
+            </td>
+            <td class="align-middle">
+                <input type="text" class="form-control col-lg-10" name="date" placeholder="時間">
+            </td>
+            <td colspan="2" class="align-middle">
+                <input type="text" class="form-control col-lg-10" name="detail" placeholder="明細">
+            </td>
+            <td class="align-middle">
+                <input type="text" class="form-control col-lg-10" name="price" placeholder="價格">
+            </td>
+            <td class="align-middle">
+                <input type="text" class="form-control col-lg-10" name="card" placeholder="卡片">
+            </td>
+            <td class="align-middle">
+                <button type="button" class="btn btn-light" onclick="createDetail(this);">Create</button>
+            </td>
+        </tr>
+        
+        <tr>
+            <td id="order" class="align-middle text-center">
+                <select class="form-control col-lg-10" name="order" id="update-order">
+                    @{
+                        foreach (var item in Model.DetailViewModel.Details)
+                        {
+                            <option value="@item.Order">@item.Order</option>
+                        }
+                    }
+                </select>
+            </td>
+            <td class="align-middle">
+                <input type="text" class="form-control col-lg-10" name="date" placeholder="時間">
+            </td>
+            <td colspan="2" class="align-middle">
+                <input type="text" class="form-control col-lg-10" name="detail" placeholder="明細">
+            </td>
+            <td class="align-middle">
+                <input type="text" class="form-control col-lg-10" name="price" placeholder="價格">
+            </td>
+            <td class="align-middle">
+                <input type="text" class="form-control col-lg-10" name="card" placeholder="卡片">
+            </td>
+            <td class="align-middle">
+                <button type="button" class="btn btn-light" onclick="updateDetail(this);">Update</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+@section Scripts
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+    function postEdit(url,data){
+        axios.post(url, data)
+        .then(function (res){
+            alert(res.data)
+            window.location.href  = "https://localhost:5001/Details/Edit"
+        })
+        .catch(function (error){
+            alert(error.response.data)
+        })
+    }
+    
+    function updateDetail(obj) {
+        let tr = $(obj).closest("tr");
+        let data = new URLSearchParams();
+        
+        let order = $("#update-order").val();
+        
+        data.append("order", order);
+        data.append("date", getData(tr, 'date'));
+        data.append("detail", getData(tr, 'detail'));
+        data.append("price", getData(tr, 'price'));
+        data.append("card", getData(tr, 'card'));
+        
+        postEdit("https://localhost:5001/Details/Update", data)
+    }
+    
+    function createDetail(obj) {
+        let tr = $(obj).closest("tr");
+        let data = new URLSearchParams();
+        
+        data.append("order", getData(tr, 'order'));
+        data.append("date", getData(tr, 'date'));
+        data.append("detail", getData(tr, 'detail'));
+        data.append("price", getData(tr, 'price'));
+        data.append("card", getData(tr, 'card'));
+        
+        postEdit("https://localhost:5001/Details/Add", data)
+    }
+    
+    function deleteDetail(obj) {
+        let order = $(obj).closest("tr").find(".detail-order").text();
+        let data = new URLSearchParams();
+        
+        data.append("order",order)
+        postEdit("https://localhost:5001/Details/Delete", data)
+    }
+    
+    function getData(html, name) {
+        return html.find(`input[name='${name}']`).val()
+    }
+    </script>
+}

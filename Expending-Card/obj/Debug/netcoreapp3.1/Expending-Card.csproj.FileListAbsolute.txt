@@ -76,8 +76,6 @@ C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Expending-Card.genruntimeconfig.cache
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Expending-Card.csproj.CopyComplete
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\DetailEdit\AllDetails.cshtml.g.cs
-C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\DetailEdit\AllDetails.cshtml.g.cs
-C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\DetailEdit\AddDetails.cshtml.g.cs
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\Index.cshtml.g.cs
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
@@ -101,3 +99,5 @@ C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcorea
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\package.json
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\AxiosCore.dll
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\Card.cshtml.g.cs
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\Details\Index.cshtml.g.cs
+C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\Details\Edit.cshtml.g.cs

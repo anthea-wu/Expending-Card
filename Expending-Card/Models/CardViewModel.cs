@@ -15,6 +15,11 @@ namespace Expending_Card.Models
     {
         public List<Card> Cards { get; set; }
 
+        public CardViewModel()
+        {
+            Cards = new List<Card>();
+        }
+        
         public void DefaultList()
         {
             var card = new Card() {Order = 1, Name = "未分類"};
@@ -24,6 +29,10 @@ namespace Expending_Card.Models
         public void AddCard(int order, string name)
         {
             var card = new Card() {Order = order, Name = name};
+            Cards.Add(card);
+        }
+        public void AddCard(Card card)
+        {
             Cards.Add(card);
         }
 
