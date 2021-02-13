@@ -68,12 +68,8 @@ namespace Expending_Card.Controllers
             
             if (price <= 0) return BadRequest("價格不得小於等於0元");
 
-            if (!IsItemExist("C", card))
-            {
-                _card.AddCard(_card.Cards.Count+1, card);
-            }
-            
-            
+            if (!IsItemExist("C", card)) _card.AddCard(_card.Cards.Count+1, card);
+
             _detail.AddList(new DetailData()
             {
                 Order = Convert.ToInt32(order),

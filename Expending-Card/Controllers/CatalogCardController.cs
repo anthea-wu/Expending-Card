@@ -11,6 +11,8 @@ namespace Expending_Card.Controllers
     {
         private readonly ILogger<CatalogCardController> _logger;
         private static readonly CardViewModel _card = new CardViewModel();
+        private static readonly DetailViewModel _detail = new DetailViewModel();
+        private static readonly ExpendingViewModel _expending = new ExpendingViewModel();
             
         public CatalogCardController (ILogger<CatalogCardController> logger)
         {
@@ -18,9 +20,16 @@ namespace Expending_Card.Controllers
         }
         
         // GET
+
+        private static void InitializeModels()
+        {
+            _expending.CardViewModel = _card;
+            _expending.DetailViewModel = _detail;
+        }
+
         public IActionResult Index()
         {
-            _card.Cards = new List<Card>();
+            InitializeModels();
             if (_card.Cards.Count != 0) return View(_card);
             
             _card.DefaultList();
