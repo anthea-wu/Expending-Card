@@ -6,7 +6,23 @@
 }
 
 <div class="row">
-    <h2>全部記帳明細</h2>
+    <div class="col-12">
+        <h2>全部記帳明細</h2>
+    </div>
+    <div class="col-12">
+        <div class="col-6 input-group">
+            <select class="custom-select" id="sort-list">
+                <option selected>選擇明細排列方式</option>
+                <option id="sort-by-order" value="order">Detail Order</option>
+                <option id="sort-by-card-order" value="card">Card order</option>
+                <option id="sort-by-date" value="date">Date</option>
+                <option id="sort-by-price" value="price">Price</option>
+            </select>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" onclick="sortDetails();">Sort Details</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row mt-4">
@@ -92,8 +108,18 @@
 {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
     <script>
+    function sortDetails() {
+        let sort = $("#sort-list").val();
+        let data = new URLSearchParams();
+        data.append("data", sort);
+        axios.post("https://localhost:5001/Details/SortDetails", data)
+        .then(() => {location.reload();})
+        .catch(error => alert(error.response.data))
+    }
+    
     function postEdit(url,data){
         axios.post(url, data)
         .then(function (res){
@@ -112,10 +138,10 @@
         let order = $("#update-order").val();
         
         data.append("order", order);
-        data.append("date", getData(tr, 'date'));
-        data.append("detail", getData(tr, 'detail'));
-        data.append("price", getData(tr, 'price'));
-        data.append("card", getData(tr, 'card'));
+        data.append("date", getInputData(tr, 'date'));
+        data.append("detail", getInputData(tr, 'detail'));
+        data.append("price", getInputData(tr, 'price'));
+        data.append("card", getInputData(tr, 'card'));
         
         postEdit("https://localhost:5001/Details/Update", data)
     }
@@ -124,11 +150,11 @@
         let tr = $(obj).closest("tr");
         let data = new URLSearchParams();
         
-        data.append("order", getData(tr, 'order'));
-        data.append("date", getData(tr, 'date'));
-        data.append("detail", getData(tr, 'detail'));
-        data.append("price", getData(tr, 'price'));
-        data.append("card", getData(tr, 'card'));
+        data.append("order", getInputData(tr, 'order'));
+        data.append("date", getInputData(tr, 'date'));
+        data.append("detail", getInputData(tr, 'detail'));
+        data.append("price", getInputData(tr, 'price'));
+        data.append("card", getInputData(tr, 'card'));
         
         postEdit("https://localhost:5001/Details/Add", data)
     }
@@ -141,7 +167,7 @@
         postEdit("https://localhost:5001/Details/Delete", data)
     }
     
-    function getData(html, name) {
+    function getInputData(html, name) {
         return html.find(`input[name='${name}']`).val()
     }
     </script>

@@ -22,11 +22,18 @@ namespace Expending_Card.Models
             Details = new List<DetailData>();
         }
         
-        public void DefaultList(Card card)
+        public void DefaultList()
         {
             Details = new List<DetailData>();
-            var detail = new DetailData() {Order = 1, Detail = "Order自動產生", Card = card, Date = DateTime.Now.ToString(), Price = 100};
-            Details.Add(detail);
+            var card = new Card() {Name = "飲料", Order = 1};
+            var detail1 = new DetailData() {Order = 1, Detail = "牛奶", Card = card, Date = "2021/02/13", Price = 89};
+            Details.Add(detail1);
+            var detail2 = new DetailData() {Order = 2, Detail = "花生", Card = new Card() {Name = "食物", Order = 2}, Date = "2021/02/14", Price = 200};
+            Details.Add(detail2);
+            var detail3 = new DetailData() {Order = 3, Detail = "火車", Card = new Card() {Name = "交通", Order = 3}, Date = "2021/02/14", Price = 100};
+            Details.Add(detail3);
+            var detail4 = new DetailData() {Order = 4, Detail = "奶茶", Card = card, Date = "2021/02/15", Price = 66};
+            Details.Add(detail4);
         }
         public void AddList(DetailData detail)
         {

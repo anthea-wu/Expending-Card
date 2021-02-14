@@ -50,7 +50,7 @@ namespace Expending_Card.Controllers
         public IActionResult Edit()
         {
             InitializeModels();
-            
+
             ViewBag.DetailNextOrder = _detail.Details.Count + 1;
             return View(_expending);
         }
@@ -112,6 +112,31 @@ namespace Expending_Card.Controllers
             _detail.UpdateList(data);
 
             return Ok("明細更新成功");
+        }
+
+        [HttpPost]
+        public IActionResult SortDetails(string data)
+        {
+            _logger.LogInformation(data);
+            switch (data) {
+                case "order":
+                    _detail.Details = new List<DetailData>(_detail.Details.OrderBy(x => x.Order));
+                    break;
+                case "card":
+                    _card.Cards = new List<Card>(_card.Cards.OrderBy(x => x.Order));
+                    break;
+                case "price":
+                    _detail.Details = new List<DetailData>(_detail.Details.OrderBy(x => x.Price));
+                    break;
+                case "date":
+                    _detail.Details =new List<DetailData>(_detail.Details.OrderBy(x => x.Date));
+                    break;
+                default:
+                    return BadRequest("請選擇一種明細排列方式");
+            }
+
+            InitializeModels();
+            return Ok();
         }
 
         private bool IsItemExist(string obj, string condition)
