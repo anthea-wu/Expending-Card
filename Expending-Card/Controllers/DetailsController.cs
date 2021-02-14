@@ -123,7 +123,7 @@ namespace Expending_Card.Controllers
                     _detail.Details = new List<DetailData>(_detail.Details.OrderBy(x => x.Order));
                     break;
                 case "card":
-                    _card.Cards = new List<Card>(_card.Cards.OrderBy(x => x.Order));
+                    _detail.Details = new List<DetailData>(_detail.Details.OrderBy(x => x.Card.Order));
                     break;
                 case "price":
                     _detail.Details = new List<DetailData>(_detail.Details.OrderBy(x => x.Price));
