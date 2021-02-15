@@ -13,10 +13,14 @@
         <div class="col-6 input-group">
             <select class="custom-select" id="sort-list">
                 <option selected>選擇明細排列方式</option>
-                <option id="sort-by-order" value="order">Detail Order</option>
-                <option id="sort-by-card-order" value="card">Card order</option>
-                <option id="sort-by-date" value="date">Date</option>
-                <option id="sort-by-price" value="price">Price</option>
+                <option value="order-asc">Detail Order (ASC)</option>
+                <option value="order-desc">Detail Order (DESC)</option>
+                <option value="card-asc">Card order (ASC)</option>
+                <option value="card-desc">Card order (DESC)</option>
+                <option value="date-asc">Date (ASC)</option>
+                <option value="date-desc">Date (DESC)</option>
+                <option value="price-asc">Price (ASC)</option>
+                <option value="price-desc">Price (DESC)</option>
             </select>
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button" onclick="sortDetails();">Sort Details</button>

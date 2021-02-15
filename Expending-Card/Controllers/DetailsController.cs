@@ -9,7 +9,7 @@ namespace Expending_Card.Controllers
 {
     public class DetailsController : Controller
     {
-        private ILogger<DetailsController> _logger;
+        private readonly ILogger<DetailsController> _logger;
         public static DetailViewModel _detail = new DetailViewModel();
         public static CardViewModel _card = new CardViewModel();
         private static readonly ExpendingViewModel _expending = new ExpendingViewModel();
@@ -119,17 +119,29 @@ namespace Expending_Card.Controllers
         {
             _logger.LogInformation(data);
             switch (data) {
-                case "order":
+                case "order-asc":
                     _detail.Details = new List<DetailData>(_detail.Details.OrderBy(x => x.Order));
                     break;
-                case "card":
+                case "card-asc":
                     _detail.Details = new List<DetailData>(_detail.Details.OrderBy(x => x.Card.Order));
                     break;
-                case "price":
+                case "price-asc":
                     _detail.Details = new List<DetailData>(_detail.Details.OrderBy(x => x.Price));
                     break;
-                case "date":
+                case "date-asc":
                     _detail.Details =new List<DetailData>(_detail.Details.OrderBy(x => x.Date));
+                    break;
+                case "order-desc":
+                    _detail.Details = new List<DetailData>(_detail.Details.OrderByDescending(x => x.Order));
+                    break;
+                case "card-desc":
+                    _detail.Details = new List<DetailData>(_detail.Details.OrderByDescending(x => x.Card.Order));
+                    break;
+                case "price-desc":
+                    _detail.Details = new List<DetailData>(_detail.Details.OrderByDescending(x => x.Price));
+                    break;
+                case "date-desc":
+                    _detail.Details =new List<DetailData>(_detail.Details.OrderByDescending(x => x.Date));
                     break;
                 default:
                     return BadRequest("請選擇一種明細排列方式");
