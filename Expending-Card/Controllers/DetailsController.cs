@@ -87,27 +87,27 @@ namespace Expending_Card.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(string order, string date, string detail, int price, string card)
+        public IActionResult Update(DetailRequest request)
         {
-            if (string.IsNullOrEmpty(date) && string.IsNullOrEmpty(detail) &&
-                price==0 && string.IsNullOrEmpty(card)) return BadRequest("至少要填寫一欄");
+            if (string.IsNullOrEmpty(request.Date) && string.IsNullOrEmpty(request.Detail) &&
+                request.Price==0 && string.IsNullOrEmpty(request.CardName)) return BadRequest("至少要填寫一欄");
             
-            if (price <= 0) return BadRequest("價格不得小於等於0元");
+            if (request.Price <= 0) return BadRequest("價格不得小於等於0元");
             
-            var old = _detail.Details.Single(x => x.Order.ToString() == order);
+            var old = _detail.Details.Single(x => x.Order == request.Order);
             
-            if (string.IsNullOrEmpty(card)) card = old.Card.Name;
-            if (string.IsNullOrEmpty(detail)) detail = old.Detail;
-            if (string.IsNullOrEmpty(date)) date = old.Date;
-            if (string.IsNullOrEmpty(price.ToString())) price = old.Price;
+            if (string.IsNullOrEmpty(request.CardName)) request.CardName = old.Card.Name;
+            if (string.IsNullOrEmpty(request.Detail)) request.Detail = old.Detail;
+            if (string.IsNullOrEmpty(request.Date)) request.Date = old.Date;
+            if (string.IsNullOrEmpty(request.Price.ToString())) request.Price = old.Price;
 
             //_card = DetailsController._card;
-            if (!IsItemExist("C", card)) _card.AddCard(_card.Cards.Count+1, card);
-            var cardData = _card.Cards.Single(x => x.Name == card);
+            if (!IsItemExist("C", request.CardName)) _card.AddCard(_card.Cards.Count+1, request.CardName);
+            var cardData = _card.Cards.Single(x => x.Name == request.CardName);
 
             var data = new DetailData()
             {
-                Order = Convert.ToInt32(order), Card = cardData, Date = date, Detail = detail, Price = price
+                Order = request.Order, Card = cardData, Date = request.Date, Detail = request.Detail, Price = request.Price
             };
             _detail.UpdateList(data);
 
@@ -156,5 +156,14 @@ namespace Expending_Card.Controllers
             return obj == "C" ? _card.Cards.Exists(x => x.Name == condition)
                 : _detail.Details.Exists(x => x.Order.ToString() == condition);
         }
+    }
+
+    public class DetailRequest
+    {
+        public string Detail { get; set; }
+        public string Date { get; set; }
+        public int Price  { get; set; }
+        public string CardName  { get; set; }
+        public int Order { get; set; }
     }
 }

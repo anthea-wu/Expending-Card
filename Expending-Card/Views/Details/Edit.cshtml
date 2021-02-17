@@ -135,17 +135,28 @@
     
     function updateDetail(obj) {
         let tr = $(obj).closest("tr");
-        let data = new URLSearchParams();
+        // let data = new URLSearchParams();
         
         let order = $("#update-order").val();
+        /*data.append("Order", order);
+        data.append("Date", getInputData(tr, 'date'));
+        data.append("Detail", getInputData(tr, 'detail'));
+        data.append("Price", getInputData(tr, 'price'));
+        data.append("CardName", getInputData(tr, 'card'));*/
         
-        data.append("order", order);
-        data.append("date", getInputData(tr, 'date'));
-        data.append("detail", getInputData(tr, 'detail'));
-        data.append("price", getInputData(tr, 'price'));
-        data.append("card", getInputData(tr, 'card'));
         
-        postEdit("https://localhost:5001/Details/Update", data)
+        let data = {
+            Order: order,
+            Date: getInputData(tr, 'date'),
+            Detail: getInputData(tr, 'detail'),
+            Price: getInputData(tr, 'price'),
+            CardName: getInputData(tr, 'card')
+        }
+        const datas = JSON.stringify(data);
+        
+        console.log(datas)
+        
+        postEdit("https://localhost:5001/Details/Update", {'request':datas})
     }
     
     function createDetail(obj) {
