@@ -120,28 +120,28 @@ namespace Expending_Card.Controllers
             _logger.LogInformation(data);
             switch (data) {
                 case "order-asc":
-                    _detail.Details = new List<DetailData>(_detail.Details.OrderBy(x => x.Order));
+                    _detail.Details = _detail.Details.OrderBy(x => x.Order).ToList();
                     break;
                 case "card-asc":
-                    _detail.Details = new List<DetailData>(_detail.Details.OrderBy(x => x.Card.Order));
+                    _detail.Details = _detail.Details.OrderBy(x => x.Card.Order).ToList();
                     break;
                 case "price-asc":
-                    _detail.Details = new List<DetailData>(_detail.Details.OrderBy(x => x.Price));
+                    _detail.Details = _detail.Details.OrderBy(x => x.Price).ToList();
                     break;
                 case "date-asc":
                     _detail.Details = _detail.Details.OrderBy(x => x.Date).ToList();
                     break;
                 case "order-desc":
-                    _detail.Details = new List<DetailData>(_detail.Details.OrderByDescending(x => x.Order));
+                    _detail.Details = _detail.Details.OrderByDescending(x => x.Order).ToList();
                     break;
                 case "card-desc":
-                    _detail.Details = new List<DetailData>(_detail.Details.OrderByDescending(x => x.Card.Order));
+                    _detail.Details = _detail.Details.OrderByDescending(x => x.Card.Order).ToList();
                     break;
                 case "price-desc":
-                    _detail.Details = new List<DetailData>(_detail.Details.OrderByDescending(x => x.Price));
+                    _detail.Details = _detail.Details.OrderByDescending(x => x.Price).ToList();
                     break;
                 case "date-desc":
-                    _detail.Details =new List<DetailData>(_detail.Details.OrderByDescending(x => x.Date));
+                    _detail.Details = _detail.Details.OrderByDescending(x => x.Date).ToList();
                     break;
                 default:
                     return BadRequest("請選擇一種明細排列方式");
