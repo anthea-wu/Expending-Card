@@ -129,7 +129,7 @@ namespace Expending_Card.Controllers
                     _detail.Details = new List<DetailData>(_detail.Details.OrderBy(x => x.Price));
                     break;
                 case "date-asc":
-                    _detail.Details =new List<DetailData>(_detail.Details.OrderBy(x => x.Date));
+                    _detail.Details = _detail.Details.OrderBy(x => x.Date).ToList();
                     break;
                 case "order-desc":
                     _detail.Details = new List<DetailData>(_detail.Details.OrderByDescending(x => x.Order));
