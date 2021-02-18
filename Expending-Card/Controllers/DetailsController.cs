@@ -58,7 +58,11 @@ namespace Expending_Card.Controllers
         [HttpPost]
         public IActionResult Delete(string order)
         {
-            if (string.IsNullOrEmpty(order) || !IsItemExist("D", order)) return BadRequest("這個明細不存在");
+            if (string.IsNullOrEmpty(order) || !_detail.Details.Exists(x => x.Order.ToString() == order))
+            {
+                return BadRequest("這個明細不存在");
+            }
+            
             _detail.DeleteList(Convert.ToInt32(order));
             return Ok("明細刪除成功");
         }
@@ -73,7 +77,10 @@ namespace Expending_Card.Controllers
             
             if (request.Price <= 0) return BadRequest("價格不得小於等於0元");
 
-            if (!IsItemExist("C", request.Card)) _card.AddCard(_card.Cards.Count+1, request.Card);
+            if (!_card.Cards.Exists(x => x.Name == request.Card))
+            {
+                _card.AddCard(_card.Cards.Count+1, request.Card);
+            }
             
             _detail.AddList(new DetailData()
             {
@@ -92,7 +99,7 @@ namespace Expending_Card.Controllers
             if (string.IsNullOrEmpty(request.Date) && string.IsNullOrEmpty(request.Detail) &&
                 request.Price==0 && string.IsNullOrEmpty(request.Card)) return BadRequest("至少要填寫一欄");
             
-            if (request.Price <= 0) return BadRequest("價格不得小於等於0元");
+            if (request.Price < 0) return BadRequest("價格不得小於0元");
             
             var old = _detail.Details.Single(x => x.Order == request.Order);
             
@@ -101,8 +108,10 @@ namespace Expending_Card.Controllers
             if (string.IsNullOrEmpty(request.Date)) request.Date = old.Date;
             if (string.IsNullOrEmpty(request.Price.ToString())) request.Price = old.Price;
 
-            //_card = DetailsController._card;
-            if (!IsItemExist("C", request.Card)) _card.AddCard(_card.Cards.Count+1, request.Card);
+            if (!_card.Cards.Exists(x => x.Name == request.Card))
+            {
+                _card.AddCard(_card.Cards.Count + 1, request.Card);
+            }
             var cardData = _card.Cards.Single(x => x.Name == request.Card);
 
             var data = new DetailData()
@@ -133,12 +142,6 @@ namespace Expending_Card.Controllers
 
             InitializeModels();
             return Ok();
-        }
-
-        private bool IsItemExist(string obj, string condition)
-        {
-            return obj == "C" ? _card.Cards.Exists(x => x.Name == condition)
-                : _detail.Details.Exists(x => x.Order.ToString() == condition);
         }
     }
 }
