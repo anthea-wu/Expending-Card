@@ -117,7 +117,6 @@ namespace Expending_Card.Controllers
         [HttpPost]
         public IActionResult SortDetails(string data)
         {
-            _logger.LogInformation(data);
             switch (data) {
                 case "order-asc":
                     _detail.Details = _detail.Details.OrderBy(x => x.Order).ToList();
