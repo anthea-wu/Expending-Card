@@ -54,5 +54,43 @@ namespace Expending_Card.Models
             old.Detail = data.Detail;
             old.Price = data.Price;
         }
+        
+        public void AscOrder(string orderBasic)
+        {
+            switch (orderBasic)
+            {
+                case "order":
+                    Details = Details.OrderBy(x => x.Order).ToList();
+                    break;
+                case "card":
+                    Details = Details.OrderBy(x => x.Card.Order).ToList();
+                    break;
+                case "price":
+                    Details = Details.OrderBy(x => x.Price).ToList();
+                    break;
+                case "date":
+                    Details = Details.OrderBy(x => x.Date).ToList();
+                    break;
+            }
+        }
+
+        public void DescOrder(string orderBasic)
+        {
+            switch (orderBasic)
+            {
+                case "order":
+                    Details = Details.OrderByDescending(x => x.Order).ToList();
+                    break;
+                case "card":
+                    Details = Details.OrderByDescending(x => x.Card.Order).ToList();
+                    break;
+                case "price":
+                    Details = Details.OrderByDescending(x => x.Price).ToList();
+                    break;
+                case "date":
+                    Details = Details.OrderByDescending(x => x.Date).ToList();
+                    break;
+            }
+        }
     }
 }
