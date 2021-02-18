@@ -64,46 +64,46 @@ namespace Expending_Card.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(string order, string date, string detail, int price, string card)
+        public IActionResult Add([FromBody]DetailRequest request)
         {
-            if (string.IsNullOrEmpty(order)) return BadRequest("錯誤：Order為空");
+            if (string.IsNullOrEmpty(request.Order.ToString())) return BadRequest("錯誤：Order為空");
             
-            if (string.IsNullOrEmpty(date) || string.IsNullOrEmpty(detail) ||
-                price==0 || string.IsNullOrEmpty(card)) return BadRequest("建立明細時不能有任何空白欄位");
+            if (string.IsNullOrEmpty(request.Date) || string.IsNullOrEmpty(request.Detail) ||
+                request.Price==0 || string.IsNullOrEmpty(request.Card)) return BadRequest("建立明細時不能有任何空白欄位");
             
-            if (price <= 0) return BadRequest("價格不得小於等於0元");
+            if (request.Price <= 0) return BadRequest("價格不得小於等於0元");
 
-            if (!IsItemExist("C", card)) _card.AddCard(_card.Cards.Count+1, card);
-
+            if (!IsItemExist("C", request.Card)) _card.AddCard(_card.Cards.Count+1, request.Card);
+            
             _detail.AddList(new DetailData()
             {
-                Order = Convert.ToInt32(order),
-                Card = _card.Cards.Single(x => x.Name == card),
-                Date = date,
-                Detail = detail,
-                Price = price
+                Order = request.Order,
+                Card = _card.Cards.Single(x => x.Name == request.Card),
+                Date = request.Date,
+                Detail = request.Detail,
+                Price = request.Price
             });
             return Ok("明細建立成功");
         }
 
         [HttpPost]
-        public IActionResult Update(DetailRequest request)
+        public IActionResult Update([FromBody]DetailRequest request)
         {
             if (string.IsNullOrEmpty(request.Date) && string.IsNullOrEmpty(request.Detail) &&
-                request.Price==0 && string.IsNullOrEmpty(request.CardName)) return BadRequest("至少要填寫一欄");
+                request.Price==0 && string.IsNullOrEmpty(request.Card)) return BadRequest("至少要填寫一欄");
             
             if (request.Price <= 0) return BadRequest("價格不得小於等於0元");
             
             var old = _detail.Details.Single(x => x.Order == request.Order);
             
-            if (string.IsNullOrEmpty(request.CardName)) request.CardName = old.Card.Name;
+            if (string.IsNullOrEmpty(request.Card)) request.Card = old.Card.Name;
             if (string.IsNullOrEmpty(request.Detail)) request.Detail = old.Detail;
             if (string.IsNullOrEmpty(request.Date)) request.Date = old.Date;
             if (string.IsNullOrEmpty(request.Price.ToString())) request.Price = old.Price;
 
             //_card = DetailsController._card;
-            if (!IsItemExist("C", request.CardName)) _card.AddCard(_card.Cards.Count+1, request.CardName);
-            var cardData = _card.Cards.Single(x => x.Name == request.CardName);
+            if (!IsItemExist("C", request.Card)) _card.AddCard(_card.Cards.Count+1, request.Card);
+            var cardData = _card.Cards.Single(x => x.Name == request.Card);
 
             var data = new DetailData()
             {
@@ -156,14 +156,5 @@ namespace Expending_Card.Controllers
             return obj == "C" ? _card.Cards.Exists(x => x.Name == condition)
                 : _detail.Details.Exists(x => x.Order.ToString() == condition);
         }
-    }
-
-    public class DetailRequest
-    {
-        public string Detail { get; set; }
-        public string Date { get; set; }
-        public int Price  { get; set; }
-        public string CardName  { get; set; }
-        public int Order { get; set; }
     }
 }

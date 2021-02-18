@@ -112,62 +112,28 @@
 {
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <script>
-    function sortDetails() {
-        let sort = $("#sort-list").val();
-        let data = new URLSearchParams();
-        data.append("data", sort);
-        axios.post("https://localhost:5001/Details/SortDetails", data)
-        .then(() => {location.reload();})
-        .catch(error => alert(error.response.data))
-    }
-    
+    <script>    
     function postEdit(url,data){
         axios.post(url, data)
         .then(function (res){
-            alert(res.data)
-            window.location.href  = "https://localhost:5001/Details/Edit"
+            alert(res.data);
+            location.reload();
         })
         .catch(function (error){
             alert(error.response.data)
         })
     }
     
-    function updateDetail(obj) {
-        let tr = $(obj).closest("tr");
-        // let data = new URLSearchParams();
-        
-        let order = $("#update-order").val();
-        /*data.append("Order", order);
-        data.append("Date", getInputData(tr, 'date'));
-        data.append("Detail", getInputData(tr, 'detail'));
-        data.append("Price", getInputData(tr, 'price'));
-        data.append("CardName", getInputData(tr, 'card'));*/
-        
+    function createDetail(obj) {
+        let tr = $(obj).closest("tr");        
         
         let data = {
-            Order: order,
-            Date: getInputData(tr, 'date'),
-            Detail: getInputData(tr, 'detail'),
-            Price: getInputData(tr, 'price'),
-            CardName: getInputData(tr, 'card')
+            order: parseInt(getInputData(tr, 'order')),
+            date: getInputData(tr, 'date'),
+            detail: getInputData(tr, 'detail'),
+            price: parseInt(getInputData(tr, 'price')),
+            card: getInputData(tr, 'card')
         }
-        const datas = JSON.stringify(data);
-        
-        console.log(datas)
-        
-        postEdit("https://localhost:5001/Details/Update", {'request':datas})
-    }
-    
-    function createDetail(obj) {
-        let tr = $(obj).closest("tr");
-        let data = new URLSearchParams();
-        
-        data.append("order", getInputData(tr, 'order'));
-        data.append("date", getInputData(tr, 'date'));
-        data.append("detail", getInputData(tr, 'detail'));
-        data.append("price", getInputData(tr, 'price'));
-        data.append("card", getInputData(tr, 'card'));
         
         postEdit("https://localhost:5001/Details/Add", data)
     }
@@ -180,8 +146,33 @@
         postEdit("https://localhost:5001/Details/Delete", data)
     }
     
+    function updateDetail(obj) {
+        let tr = $(obj).closest("tr");
+        let order = $("#update-order").val();
+        
+        let data = {
+            order: parseInt(order),
+            date: getInputData(tr, 'date'),
+            detail: getInputData(tr, 'detail'),
+            price: parseInt(getInputData(tr, 'price')),
+            card: getInputData(tr, 'card')
+        }
+        
+        postEdit("https://localhost:5001/Details/Update", data)
+    }
+    
     function getInputData(html, name) {
         return html.find(`input[name='${name}']`).val()
     }
+    
+    function sortDetails() {
+        let sort = $("#sort-list").val();
+        let data = new URLSearchParams();
+        data.append("data", sort);
+        axios.post("https://localhost:5001/Details/SortDetails", data)
+        .then(() => {location.reload();})
+        .catch(error => alert(error.response.data))
+    }
+    
     </script>
 }
