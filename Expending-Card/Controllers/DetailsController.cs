@@ -126,15 +126,17 @@ namespace Expending_Card.Controllers
         [HttpPost]
         public IActionResult SortDetails(string data)
         {
-            var splitData = data.Split('-');
+            // rename
+            var orderBasic = data.Split('-')[0];
+            var AscOrBsc = data.Split('-')[1];
             
-            switch (splitData[1])
+            switch (AscOrBsc)
             {
                 case "asc":
-                    _detail.AscOrder(splitData[0]);
+                    _detail.AscOrder(orderBasic);
                     break;
                 case "desc":
-                    _detail.DescOrder(splitData[0]);
+                    _detail.DescOrder(orderBasic);
                     break;
                 default:
                     return BadRequest("請選擇一種明細排列方式");
