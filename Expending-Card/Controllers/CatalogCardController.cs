@@ -81,6 +81,19 @@ namespace Expending_Card.Controllers
             return Ok("卡片名稱修改成功");
         }
 
+        [HttpPost]
+        public IActionResult AddCardForDetail(string name)
+        {
+            _card.AddCard(_card.Cards.Count + 1, name);
+            return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult GetCardsOrder()
+        {
+            return Ok(_card.Cards.Count + 1);
+        }
+
         private static void InitializeModels()
         {
             _expending.CardViewModel = _card;

@@ -112,10 +112,22 @@
 {
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+
     <script>    
+    
     const detailRequest = axios.create({
         baseURL: "https://localhost:5001/Details"
     })
+    
+    const cardRequest = axios.create({
+        baseURL: "https://localhost:5001/CatalogCard"
+    })
+    
+    let cards = [];
+    @foreach (var item in Model.CardViewModel.Cards)
+    {
+        @:cards.push('@item.Name');
+    }
     
     function detailsEdit(url,data){
         detailRequest.post(url, data)
@@ -131,14 +143,49 @@
     }
     
     function createDetail(obj) {
-        let tr = $(obj).closest("tr");        
+        let tr = $(obj).closest("tr");
+
+        let order = parseInt(getInputData(tr, 'order'));
+        let date = getInputData(tr, 'date');
+        let detail = getInputData(tr, 'detail');
+        let price = parseInt(getInputData(tr, 'price'));
+        let cardName = getInputData(tr, 'card')
+        
+        if (cardName=="" || detail=="" || price==0 || date=="") {
+            
+            if (price<0) {
+                alert("價格不得小於等於0元")
+                return ;
+            }
+            
+            alert("建立明細時不能有任何空白欄位")
+            return ;
+        }
+
+        let card;
+        let cardData = new URLSearchParams();
+        cardData.append("name", cardName);
+        
+        if (cards.indexOf(cardName) <= 0) {
+            cardRequest.post('/AddCardForDetail', cardData)
+            let cardOrder = cardRequest.post('/GetCardsOrder').then((res) => {
+                console.log(res.data);
+                return parseInt(res.data)
+            })
+            console.log(cardOrder);
+            
+            card = {
+                order: cardOrder,
+                name: cardName
+            }
+        }
         
         let data = {
-            order: parseInt(getInputData(tr, 'order')),
-            date: getInputData(tr, 'date'),
-            detail: getInputData(tr, 'detail'),
-            price: parseInt(getInputData(tr, 'price')),
-            card: getInputData(tr, 'card')
+            order: order,
+            date: date,
+            detail: detail,
+            price: price,
+            card: card,
         }
         
         detailsEdit("/Add", data)
@@ -147,8 +194,8 @@
     function deleteDetail(obj) {
         let order = $(obj).closest("tr").find(".detail-order").text();
         let data = new URLSearchParams();
+        data.append("order",order);
         
-        data.append("order",order)
         detailsEdit("/Delete", data)
     }
     
@@ -167,16 +214,16 @@
         detailsEdit("/Update", data)
     }
     
-    function getInputData(html, name) {
-        return html.find(`input[name='${name}']`).val()
-    }
-    
     function sortDetails() {
         let sort = $("#sort-list").val();
         let data = new URLSearchParams();
         data.append("data", sort);
         
         detailsEdit("/SortDetails", data)
+    }
+    
+    function getInputData(html, name) {
+        return html.find(`input[name='${name}']`).val()
     }
     
     </script>

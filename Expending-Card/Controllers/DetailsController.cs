@@ -68,28 +68,16 @@ namespace Expending_Card.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody]DetailRequest request)
+        public IActionResult Add([FromBody]DetailRequestTest request)
         {
             if (string.IsNullOrEmpty(request.Order.ToString())) return BadRequest("錯誤：Order為空");
-            
-            if (string.IsNullOrEmpty(request.Date) || string.IsNullOrEmpty(request.Detail) ||
-                request.Price==0 || string.IsNullOrEmpty(request.Card)) return BadRequest("建立明細時不能有任何空白欄位");
-            
-            if (request.Price <= 0) return BadRequest("價格不得小於等於0元");
 
-            if (!_card.Cards.Exists(x => x.Name == request.Card))
+            /*if (!_card.Cards.Exists(x => x.Name == request.Card.Name))
             {
-                _card.AddCard(_card.Cards.Count+1, request.Card);
-            }
+                _card.AddCard(_card.Cards.Count+1, request.Card.Name);
+            }*/
             
-            _detail.AddList(new DetailData()
-            {
-                Order = request.Order,
-                Card = _card.Cards.Single(x => x.Name == request.Card),
-                Date = request.Date,
-                Detail = request.Detail,
-                Price = request.Price
-            });
+            _detail.AddList(request);
             return Ok("明細建立成功");
         }
 
@@ -145,5 +133,16 @@ namespace Expending_Card.Controllers
             InitializeModels();
             return Ok();
         }
+        
+        
+    }
+
+    public class DetailRequestTest : DetailData
+    {
+        public string Detail { get; set; }
+        public string Date { get; set; }
+        public int Price  { get; set; }
+        public Card Card  { get; set; }
+        public int Order { get; set; }
     }
 }
