@@ -115,11 +115,11 @@
     <script>    
     function postEdit(url,data){
         axios.post(url, data)
-        .then(function (res){
+        .then( (res) => {
             alert(res.data);
             location.reload();
         })
-        .catch(function (error){
+        .catch( (error) => {
             alert(error.response.data)
         })
     }
@@ -170,8 +170,12 @@
         let data = new URLSearchParams();
         data.append("data", sort);
         axios.post("https://localhost:5001/Details/SortDetails", data)
-        .then(() => {location.reload();})
-        .catch(error => alert(error.response.data))
+        .then(() => {
+            location.reload()
+        })
+        .catch(error => {
+            alert(error.response.data)
+        })
     }
     
     </script>
