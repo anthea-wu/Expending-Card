@@ -76,6 +76,11 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <script>    
+    
+    const cardRequest = axios.create({
+        baseURL: 'https://localhost:5001/CatalogCard'
+    })
+    
     let cards = [];
     @foreach (var item in Model.Cards)
     {
@@ -84,29 +89,29 @@
     
     function createCard() {
         console.log("建立卡片")
-        editInfo('https://localhost:5001/CatalogCard/AddCard', "create-info")
+        editInfo('/AddCard', "create-info")
     }
 
     function deleteCard() {
-        editInfo('https://localhost:5001/CatalogCard/DeleteCard', "delete-info")
+        editInfo('/DeleteCard', "delete-info")
     }
     
     function updateCardName() {
-        editInfo('https://localhost:5001/CatalogCard/UpdateCardName', "update-name");
+        editInfo('/UpdateCardName', "update-name");
     }
     
     function editInfo(url, form) {
         let data = new FormData(document.forms.namedItem(form));
         console.log("傳送資料")
-        axios.post(url, data)
-        .then(function (response) {
-            console.log(response.data);
+        
+        cardRequest.post(url, data)
+        .then(() => {
             alert(response.data);
-            window.location.href = "https://localhost:5001/CatalogCard/EditCard";
+            location.reload()
         })
-        .catch(function (error) {
-            alert(error.response.data);
-        });
+        .catch(() => {
+            alert(error.response.data)
+        })
     }
    </script>
 }
