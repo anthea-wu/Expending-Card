@@ -68,16 +68,21 @@ namespace Expending_Card.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody]DetailRequestTest request)
+        public IActionResult Add([FromBody]DetailRequest request)
         {
             if (string.IsNullOrEmpty(request.Order.ToString())) return BadRequest("錯誤：Order為空");
 
-            /*if (!_card.Cards.Exists(x => x.Name == request.Card.Name))
+            if (!_card.Cards.Exists(x => x.Name == request.Card))
             {
-                _card.AddCard(_card.Cards.Count+1, request.Card.Name);
-            }*/
-            
-            _detail.AddList(request);
+                _card.AddCard(_card.Cards.Count + 1, request.Card);
+            }
+
+            var card = _card.Cards.Single(x => x.Name == request.Card);
+
+            _detail.AddList(new DetailData()
+            {
+                Order = request.Order, Card = card, Date = request.Date, Detail = request.Detail, Price = request.Price
+            });
             return Ok("明細建立成功");
         }
 

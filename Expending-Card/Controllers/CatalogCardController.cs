@@ -88,7 +88,7 @@ namespace Expending_Card.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult GetCardsOrder()
         {
             return Ok(_card.Cards.Count + 1);

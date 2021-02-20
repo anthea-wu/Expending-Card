@@ -119,29 +119,27 @@
         baseURL: "https://localhost:5001/Details"
     })
     
+    const detailConfig = {
+        
+    }
+    
     const cardRequest = axios.create({
-        baseURL: "https://localhost:5001/CatalogCard"
+        baseURL: "https://localhost:5001/CatalogCard",
     })
     
     let cards = [];
     @foreach (var item in Model.CardViewModel.Cards)
     {
         @:cards.push('@item.Name');
-    }
     
-    function detailsEdit(url,data){
-        detailRequest.post(url, data)
-        .then( (res) => {
-            if (url != '/SortDetails') {
-                alert(res.data);
-            }
-            location.reload();
-        })
-        .catch( (error) => {
-            alert(error.response.data)
-        })
     }
-    
+    function getCardOrder() {
+        let promise = cardRequest.get('/GetCardsOrder')
+        let dataPromise = promise.then((response) => response.data)
+        console.log('getCardOrder will return: ' + dataPromise)
+        
+        return dataPromise
+    }
     function createDetail(obj) {
         let tr = $(obj).closest("tr");
 
@@ -151,7 +149,7 @@
         let price = parseInt(getInputData(tr, 'price'));
         let cardName = getInputData(tr, 'card')
         
-        if (cardName=="" || detail=="" || price==0 || date=="") {
+        if (cardName=="" || detail=="" || price<=0 || date=="") {
             
             if (price<0) {
                 alert("價格不得小於等於0元")
@@ -162,30 +160,27 @@
             return ;
         }
 
-        let card;
-        let cardData = new URLSearchParams();
+        /*let cardData = new URLSearchParams();
         cardData.append("name", cardName);
         
         if (cards.indexOf(cardName) <= 0) {
             cardRequest.post('/AddCardForDetail', cardData)
-            let cardOrder = cardRequest.post('/GetCardsOrder').then((res) => {
-                console.log(res.data);
-                return parseInt(res.data)
-            })
-            console.log(cardOrder);
-            
-            card = {
-                order: cardOrder,
-                name: cardName
-            }
         }
+        
+        let cardOrder = getCardOrder();
+        console.log('after get order: ' + cardOrder);
+
+        let card = {
+            order: cardOrder,
+            name: cardName
+        };*/
         
         let data = {
             order: order,
             date: date,
             detail: detail,
             price: price,
-            card: card,
+            card: cardName,
         }
         
         detailsEdit("/Add", data)
@@ -220,6 +215,20 @@
         data.append("data", sort);
         
         detailsEdit("/SortDetails", data)
+    }
+    
+    
+    function detailsEdit(url,data){
+        detailRequest.post(url, data)
+        .then( (res) => {
+            if (url != '/SortDetails') {
+                alert(res.data);
+            }
+            location.reload();
+        })
+        .catch( (error) => {
+            alert(error.response.data)
+        })
     }
     
     function getInputData(html, name) {

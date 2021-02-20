@@ -105,11 +105,11 @@
         console.log("傳送資料")
         
         cardRequest.post(url, data)
-        .then(() => {
+        .then((response) => {
             alert(response.data);
             location.reload()
         })
-        .catch(() => {
+        .catch((error) => {
             alert(error.response.data)
         })
     }

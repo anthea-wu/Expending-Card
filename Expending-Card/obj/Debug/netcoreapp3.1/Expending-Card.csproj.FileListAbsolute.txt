@@ -58,7 +58,6 @@ C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Expending-Card.TagHelpers.input.cache
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Expending-Card.TagHelpers.output.cache
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Expending-Card.RazorCoreGenerate.cache
-C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\ShowOneCard.cshtml.g.cs
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
@@ -75,7 +74,6 @@ C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Expending-Card.pdb
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Expending-Card.genruntimeconfig.cache
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Expending-Card.csproj.CopyComplete
-C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\DetailEdit\AllDetails.cshtml.g.cs
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\Index.cshtml.g.cs
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
@@ -91,9 +89,7 @@ C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
-C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\CardEditError.cshtml.g.cs
 C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\Index.cshtml.g.cs
-C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\DetailEdit\AddDetails.cshtml.g.cs
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\EditCard.cshtml.g.cs
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\package-lock.json
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\package.json
@@ -101,3 +97,10 @@ C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\bin\Debug\netcorea
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\Card.cshtml.g.cs
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\Details\Index.cshtml.g.cs
 C:\Users\d0509\Documents\GitHub\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\Details\Edit.cshtml.g.cs
+C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\package-lock.json
+C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\package.json
+C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\bin\Debug\netcoreapp3.1\AxiosCore.dll
+C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\Card.cshtml.g.cs
+C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\CatalogCard\EditCard.cshtml.g.cs
+C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\Details\Edit.cshtml.g.cs
+C:\Users\anthea.wu15\Documents\AspNetCore_learning\Expending-Card\Expending-Card\obj\Debug\netcoreapp3.1\Razor\Views\Details\Index.cshtml.g.cs
