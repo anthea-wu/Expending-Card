@@ -133,6 +133,7 @@
         @:cards.push('@item.Name');
     
     }
+    
     function getCardOrder() {
         let promise = cardRequest.get('/GetCardsOrder')
         let dataPromise = promise.then((response) => response.data)
@@ -140,6 +141,7 @@
         
         return dataPromise
     }
+    
     function createDetail(obj) {
         let tr = $(obj).closest("tr");
 
@@ -149,14 +151,14 @@
         let price = parseInt(getInputData(tr, 'price'));
         let cardName = getInputData(tr, 'card')
         
-        if (cardName=="" || detail=="" || price<=0 || date=="") {
-            
-            if (price<0) {
-                alert("價格不得小於等於0元")
+        if (price<=0 || !price) {
+            console.log(price)
+            if (cardName=="" || detail=="" || date=="") {
+                alert("建立明細時不能有任何空白欄位")
                 return ;
             }
             
-            alert("建立明細時不能有任何空白欄位")
+            alert("價格不得為空或小於等於0元")
             return ;
         }
 
