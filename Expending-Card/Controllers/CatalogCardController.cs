@@ -4,19 +4,22 @@ using System.Linq;
 using System.Threading;
 using Expending_Card.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
 namespace Expending_Card.Controllers
 { public class CatalogCardController : Controller
     {
         private readonly ILogger<CatalogCardController> _logger;
-        public static CardViewModel _card = new CardViewModel();
-        public static DetailViewModel _detail = new DetailViewModel();
+        private static readonly CardViewModel _card = new CardViewModel();
+        private static readonly DetailViewModel _detail = new DetailViewModel();
         private static readonly ExpendingViewModel _expending = new ExpendingViewModel();
+        private readonly IMemoryCache _cache;
             
-        public CatalogCardController (ILogger<CatalogCardController> logger)
+        public CatalogCardController (ILogger<CatalogCardController> logger, IMemoryCache cache)
         {
             _logger = logger;
+            _cache = cache;
         }
 
         public IActionResult Index()
@@ -26,9 +29,9 @@ namespace Expending_Card.Controllers
                 GetCurrentModels();
                 return View(_card);
             }
-            
-            InitializeModels();
+
             GetCurrentModels();
+            InitializeModels();
             _card.DefaultList();
             return View(_card);
         }
@@ -36,9 +39,9 @@ namespace Expending_Card.Controllers
         public IActionResult Card(string name)
         {
             if (!IsCardExist(name)) return BadRequest("卡片不存在，請利用新增功能增加該卡片");
-            
-            InitializeModels();
+
             GetCurrentModels();
+            InitializeModels();
             ViewBag.ShowCard = _card.Cards.Single(x => x.Name == name);
             return View(_expending);
 
@@ -96,19 +99,50 @@ namespace Expending_Card.Controllers
 
         private static void InitializeModels()
         {
-            _expending.CardViewModel = _card;
-            _expending.DetailViewModel = _detail;
+            _expending.CardViewModel.Cards = _card.Cards;
+            _expending.DetailViewModel.Details = _detail.Details;
         }
 
         private void GetCurrentModels()
         {
-            _detail = DetailsController._detail;
-            _card = DetailsController._card;
+            var detailDetails = GetDetailCache();
+            var cardCache = GetCardCache();
+            if (detailDetails != null)
+            {
+                _detail.Details = detailDetails;
+            }
+            if (cardCache != null)
+            {
+                _card.Cards = cardCache;
+            }
         }
 
         private static bool IsCardExist(string name)
         {
             return _card.Cards.Any(x => x.Name == name);
+        }
+
+        public List<Card> SetCardCache()
+        {
+            if (!_cache.TryGetValue(Cache.Details, out List<Card> cacheCard))
+            {
+                cacheCard = _card.Cards;
+                _cache.Set(Cache.Details, cacheCard, TimeSpan.FromSeconds(10));
+            }
+
+            return cacheCard;
+        }
+        
+        public List<DetailData> GetDetailCache()
+        {
+            var cacheDetail = _cache.Get<List<DetailData>>(Cache.Details);
+            return cacheDetail;
+        }
+        
+        public List<Card> GetCardCache()
+        {
+            var cacheCard = _cache.Get<List<Card>>(Cache.Cards);
+            return cacheCard;
         }
     }
 }

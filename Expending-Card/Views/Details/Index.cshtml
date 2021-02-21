@@ -1,6 +1,8 @@
 ﻿@model Expending_Card.Models.ExpendingViewModel
 
 @{
+    var detailCache = ViewData["DetailCache"];
+    var cardCache = ViewData["CardCache"];
     ViewBag.Title = "記帳明細";
     Layout = "_Layout";
 }
@@ -22,3 +24,17 @@
         </form>
     </div>
 </div>
+
+@section Scripts
+{
+    <script>
+    let cardCache = @Html.Raw(cardCache.ToString());
+    let detailCache = @Html.Raw(detailCache.ToString());
+    
+    function CacheLog () {
+        console.log(cardCache)
+        console.log(detailCache)
+    }
+    
+    </script>
+}

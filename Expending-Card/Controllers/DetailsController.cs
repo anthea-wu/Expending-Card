@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Expending_Card.Models;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 
 namespace Expending_Card.Controllers
@@ -10,13 +11,15 @@ namespace Expending_Card.Controllers
     public class DetailsController : Controller
     {
         private readonly ILogger<DetailsController> _logger;
-        public static DetailViewModel _detail = new DetailViewModel();
-        public static CardViewModel _card = new CardViewModel();
+        private static DetailViewModel _detail = new DetailViewModel();
+        private static CardViewModel _card = new CardViewModel();
         private static readonly ExpendingViewModel _expending = new ExpendingViewModel();
-        
-        public DetailsController(ILogger<DetailsController> logger)
+        private static IMemoryCache _cache;
+
+        public DetailsController(ILogger<DetailsController> logger, IMemoryCache cache)
         {
             _logger = logger;
+            _cache = cache;
         }
 
         private static void InitializeModels()
@@ -27,23 +30,24 @@ namespace Expending_Card.Controllers
 
         public IActionResult Index()
         {
+            
             if (_detail.Details.Count != 0 && _card.Cards.Count != 0)
             {
-                GetCurrentModels();
-                return View(_expending);
+                //GetCurrentModels();
+                return View("Index",_expending);
             }
             
             InitializeModels();
             GetCurrentModels();
-            
-            if (_card.Cards.Count == 0) _card.DefaultList();
+            ViewData["DetailCache"] = SetDetailCache();
+            ViewData["CardCache"] = SetCardCache();
             return View(_expending);
         }
 
         private void GetCurrentModels()
         {
-            _detail = CatalogCardController._detail;
-            _card = CatalogCardController._card;
+            //_detail = CatalogCardController._detail;
+            //_card = CatalogCardController._card;
         }
 
 
@@ -83,6 +87,7 @@ namespace Expending_Card.Controllers
             {
                 Order = request.Order, Card = card, Date = request.Date, Detail = request.Detail, Price = request.Price
             });
+            
             return Ok("明細建立成功");
         }
 
@@ -138,8 +143,42 @@ namespace Expending_Card.Controllers
             InitializeModels();
             return Ok();
         }
+
+        public static List<DetailData> SetDetailCache()
+        {
+            if (!_cache.TryGetValue(Cache.Details, out List<DetailData> cacheDetail))
+            {
+                cacheDetail = _detail.Details;
+                _cache.Set(Cache.Details, cacheDetail, TimeSpan.FromSeconds(10));
+            }
+
+            return cacheDetail;
+        }
+
+        public static List<Card> SetCardCache()
+        {
+            if (!_cache.TryGetValue(Cache.Details, out List<Card> cacheCard))
+            {
+                cacheCard = _card.Cards;
+                _cache.Set(Cache.Details, cacheCard, TimeSpan.FromSeconds(10));
+            }
+
+            return cacheCard;
+        }
         
+        public List<DetailData> GetDetailCache()
+        {
+            var cacheDetail = _cache.Get<List<DetailData>>(Cache.Details);
+            return cacheDetail;
+        }
         
+        public List<Card> GetCardCache()
+        {
+            var cacheCard = _cache.Get<List<Card>>(Cache.Cards);
+            return cacheCard;
+        }
+
+
     }
 
     public class DetailRequestTest : DetailData

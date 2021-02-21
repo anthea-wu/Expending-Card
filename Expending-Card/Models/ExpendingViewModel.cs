@@ -1,4 +1,6 @@
-﻿namespace Expending_Card.Models
+﻿using Expending_Card.Controllers;
+
+namespace Expending_Card.Models
 {
     public class ExpendingViewModel
     {
